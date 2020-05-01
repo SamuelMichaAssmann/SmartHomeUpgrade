@@ -1,0 +1,2 @@
+rootProject.name='SmartHomeUpgrade'
+include ':app'
