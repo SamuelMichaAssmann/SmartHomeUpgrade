@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
             }
             text = doc.getDocumentURI();
 
-            txt.setText(text);
 
             return null;
         }
