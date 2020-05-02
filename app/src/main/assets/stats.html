@@ -8,6 +8,47 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
 
+    <script>
+        var lautstärken = [0, 10, 40, 80, 110, 60, 20, 0, 0, 0, 100, 30, 50, 0, 0, 0];
+        var zeiten = ["12:10", "13:10", "14:10", "15:10", "16:10", "17:10", "18:10", "19:10", "20:10", "21:10", "22:10", "23:10", "00:10", "01:10", "02:10", "03:10", "04:10", "05:10", "06:10", "07:10"];
+
+        var zwisch = "&quot;,&quot;";
+        var chartteil1 = "<div class=\"chart-area\"><canvas data-bs-chart=\"{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;";                        
+        var chartteil2 = "&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;dB&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;";
+        var chartteil3 = "&quot;],&quot;backgroundColor&quot;:&quot;rgba(78, 115, 223, 0.05)&quot;,&quot;borderColor&quot;:&quot;rgba(78, 1, 223, 1)&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;],&quot;drawOnChartArea&quot;:false},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;padding&quot;:20}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;]},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;padding&quot;:20}}]}}}\"></canvas></div>";
+        
+        var chart = chartteil1 + zeiten[0];
+        for (let index = 1; index < zeiten.length; index++) {
+            chart += zwisch + zeiten[index];
+        }
+        chart += chartteil2 + lautstärken[0];
+        for (let index = 1; index < lautstärken.length; index++) {
+            chart += zwisch + lautstärken[index];
+        }
+        chart += chartteil3;
+    
+        var verteilung0 = ["30", "60", "10"];
+        var verteilung1 = ["An", "Aus", "Unbekannt"];
+
+        var pi1 = "<div class=\"chart-area\"><canvas data-bs-chart=\"{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;";
+        var pi2 = "&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;#4e73df&quot;,&quot;#1cc88a&quot;,&quot;#36b9cc&quot;],&quot;borderColor&quot;:[&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;],&quot;data&quot;:[&quot;";
+        var pi3 = "&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}\"></canvas></div>";
+        
+        var pichart = pi1 + verteilung1[0]; 
+        for (let index = 1; index < verteilung1.length; index++) {
+            pichart += zwisch + verteilung1[index];
+        }
+        pichart += pi2 + verteilung0[0];
+        for (let index = 1; index < verteilung0.length; index++) {
+            pichart += zwisch + verteilung0[index];
+        }
+         pichart += pi3;    
+
+         var pidot = "<div class=\"text-center small mt-4\"><span class=\"mr-2\"><i class=\"fas fa-circle dotcol1\"></i>&nbsp;" + verteilung1[0] + "</span><span class=\"mr-2\"><i class=\"fas fa-circle dotcol2\"></i>&nbsp;" + verteilung1[1] + "</span><span class=\"mr-2\"><i class=\"fas fa-circle dotcol3\"></i>&nbsp;" + verteilung1[2] + "</span></div>";
+
+
+
+    </script>
 </head>
 
 <body id="page-top">
@@ -22,24 +63,33 @@
                             <div class="card shadow mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     
-                                    <h6 class="text-primary font-weight-bold m-0">
+                                    <h6 class="text-primary font-weight-bold m-0">Verlauf</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-area"><canvas data-bs-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Earnings&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;0&quot;,&quot;0&quot;,&quot;100000&quot;,&quot;5000&quot;,&quot;15000&quot;,&quot;10000&quot;,&quot;20000&quot;,&quot;15000&quot;,&quot;25000&quot;],&quot;backgroundColor&quot;:&quot;rgba(78, 115, 223, 0.05)&quot;,&quot;borderColor&quot;:&quot;rgba(78, 1                                   , 223, 1)&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;],&quot;drawOnChartArea&quot;:false},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;padding&quot;:20}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;]},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;padding&quot;:20}}]}}}"></canvas></div>
+                                    <div id="chartall">
+                                        <script>
+                                            document.getElementById("chartall").innerHTML = chart;
+                                        </script>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-5 col-xl-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <div id="test">
-                                        <script type="text/javascript" src="test2.js"></script>
-                                    </div>
+                                    <h6 class="text-primary font-weight-bold m-0">Status</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-area"><canvas data-bs-chart="{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Direct&quot;,&quot;Social&quot;,&quot;Referral&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;backgroundColor&quot;:[&quot;#4e73df&quot;,&quot;#1cc88a&quot;,&quot;#36b9cc&quot;],&quot;borderColor&quot;:[&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;],&quot;data&quot;:[&quot;50&quot;,&quot;30&quot;,&quot;15&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}"></canvas></div>
-                                    <div
-                                        class="text-center small mt-4"><span class="mr-2"><i class="fas fa-circle text-primary"></i>&nbsp;Direct</span><span class="mr-2"><i class="fas fa-circle text-success"></i>&nbsp;Social</span><span class="mr-2"><i class="fas fa-circle text-info"></i>&nbsp;Refferal</span></div>
+                                    <div id="pi">
+                                        <script>
+                                            document.getElementById("pi").innerHTML = pichart;
+                                        </script>
+                                    </div>    
+                                    <div id="pido">
+                                        <script>
+                                            document.getElementById("pido").innerHTML = pidot;
+                                        </script>
+                                    </div> 
                             </div>
                         </div>
                     </div>
@@ -48,8 +98,7 @@
                     <div class="col-lg-6 mb-4">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="text-primary font-weight-bold m-0">"@data/ht1dat"</h6>
-                                <h6 class="@data/htdat text-primary font-weight-bold m-0">Test</h6>
+                                <h6 class="text-primary font-weight-bold m-0">Projects</h6>
                             </div>
                             <div class="card-body">
                                 <h4 class="small font-weight-bold">Server migration<span class="float-right">20%</span></h4>
@@ -123,3 +172,5 @@
 </body>
 
 </html>
+
+
