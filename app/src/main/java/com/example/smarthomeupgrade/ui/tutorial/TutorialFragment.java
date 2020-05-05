@@ -1,4 +1,4 @@
-package com.example.smarthomeupgrade.ui.gallery;
+package com.example.smarthomeupgrade.ui.tutorial;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,25 +14,18 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.smarthomeupgrade.R;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+public class TutorialFragment extends Fragment {
 
-public class StatsFragment extends Fragment {
-
-    private StatsViewModel statsViewModel;
+    private TutorialViewModel tutorialViewModel;
     private WebView webView;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        statsViewModel = ViewModelProviders.of(this).get(StatsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_stats, container, false);
-
-
+        tutorialViewModel = ViewModelProviders.of(this).get(TutorialViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_tutorial, container, false);
 
         webView = (WebView) root.findViewById(R.id.webview_home);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("file:///android_asset/stats.html");
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.loadUrl("file:///android_asset/tutorial.html");
         WebSettings websettings = webView.getSettings();
         websettings.setJavaScriptEnabled(true);
         return root;

@@ -1,16 +1,16 @@
-package com.example.smarthomeupgrade.ui.slideshow;
+package com.example.smarthomeupgrade.ui.stats;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class TutorialViewModel extends ViewModel {
+public class StatsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public TutorialViewModel() {
+    public StatsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Tutorial");
+        mText.setValue("Stats");
     }
 
     public LiveData<String> getText() {

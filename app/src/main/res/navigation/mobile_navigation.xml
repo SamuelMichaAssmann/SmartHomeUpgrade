@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.smarthomeupgrade.ui.gallery.StatsFragment"
+        android:name="com.example.smarthomeupgrade.ui.stats.StatsFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_stats" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.smarthomeupgrade.ui.slideshow.TutorialFragment"
+        android:name="com.example.smarthomeupgrade.ui.tutorial.TutorialFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_tutorial" />
 
