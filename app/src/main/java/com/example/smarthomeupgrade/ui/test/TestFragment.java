@@ -5,6 +5,9 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,13 +26,12 @@ import java.util.Arrays;
 
 public class TestFragment extends Fragment {
 
-    private TestViewModel galleryViewModel;
-    TextView txt;
-    ArrayList<File> dateilist;
+    private TestViewModel TestViewModel;
+    private WebView webView;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_stats, container, false);
+        TestViewModel = ViewModelProviders.of(this).get(TestViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_test, container, false);
 
         //Snackbar.make(view, "text", Snackbar.LENGTH_LONG).setAction("Action", new View.OnClickListener() {
         //    @Override
@@ -38,6 +40,12 @@ public class TestFragment extends Fragment {
 
         //    }
         //}).show();
+
+        webView = (WebView) root.findViewById(R.id.webview_login);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("file:///android_asset/login.html");
+        WebSettings websettings = webView.getSettings();
+        websettings.setJavaScriptEnabled(true);
 
 
         return root;
