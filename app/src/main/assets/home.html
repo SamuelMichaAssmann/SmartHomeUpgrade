@@ -107,15 +107,13 @@
                                                             <div class="carousel-item active"><img class="w-100 d-block" src="assets/img/socks/nosocks.png" alt="Slide Image"></div>
                                                         </div>
                                                     </div>
-                                                    <div><a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel" role="button"
-                                                            data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+                                                    <div><a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel" role="button"data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
                                                 </div>
                                             </div>
                                         </section>
                                     </div>
-                                    
                                     <script>
-                                        
+                                        var count = 0;
                                         var sock =["socks0.png", "socks1.png", "socks2.png", "socks3.png", "socks4.png", "socks5.png", "socks6.png", "socks7.png", "socks8.png", "socks9.png"];
 
                                         var sockstart1 = "<div class=\"carousel-item active\"><img class=\"w-100 d-block\" src=\"assets/img/socks/";
@@ -125,7 +123,7 @@
                                         function adding() {
                                             count += 1;
                                             document.getElementById("clickme").innerHTML = "&nbsp;&nbsp;Socks: " + count + "&nbsp;&nbsp;";
-                                            sockgenerator()
+                                            sockgenerator();
                                         };
                                         
                                         function subing() {
@@ -135,7 +133,7 @@
                                                 count -= 1;
                                             }
                                             document.getElementById("clickme").innerHTML = "&nbsp;&nbsp;Socks: " + count + "&nbsp;&nbsp;";
-                                            sockgenerator()
+                                            sockgenerator();
                                         };
                                         function sockgenerator() {
                                             if (count == 0) {
