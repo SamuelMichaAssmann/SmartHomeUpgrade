@@ -1,14 +1,14 @@
-package com.example.smarthomeupgrade.ui.test;
+package com.example.smarthomeupgrade.ui.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class TestViewModel extends ViewModel {
+public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public TestViewModel() {
+    public LoginViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Test2");
     }

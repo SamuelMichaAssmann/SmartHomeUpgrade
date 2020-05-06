@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/nav_test"
-        android:name="com.example.smarthomeupgrade.ui.test.TestFragment"
+        android:name="com.example.smarthomeupgrade.ui.login.LoginFragment"
         android:label="@string/menu_test"
-        tools:layout="@layout/fragment_test" />
+        tools:layout="@layout/fragment_login" />
 </navigation>
