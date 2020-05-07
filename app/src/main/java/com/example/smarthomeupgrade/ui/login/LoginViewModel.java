@@ -10,7 +10,7 @@ public class LoginViewModel extends ViewModel {
 
     public LoginViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Test2");
+        mText.setValue("Login");
     }
 
     public LiveData<String> getText() {
