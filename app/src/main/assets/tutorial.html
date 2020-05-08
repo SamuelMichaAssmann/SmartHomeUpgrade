@@ -24,16 +24,16 @@
                             </div>
                             <div class="card-body">
                                 <section class="clean-block slider">
+                                    <p>Um eine Waschmaschine hinzufügen zu können müssen sie sich einen Github Account anlegen, da das System Github als Datenspeicher benutzt.</p>
                                     <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
                                     <div class="container text-center">
-                                        <button class="btn btn-primary btn-xl js-scroll-trigger text-center" onclick= "window.open('https://github.com/join?source=header-home')">Sign Up in Githup</button>
+                                        <a href="https://github.com/join?source=header-home"><button class="btn btn-primary btn-xl js-scroll-trigger text-center">Sign Up to Gitub</button></a>
                                     </div>
                                     <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
                                 </section>
                             </div>
                         </div>
                     </div>
-
 
                     <div class="col-lg-7 col-xl-8">
                         <div class="card shadow mb-4">
@@ -42,31 +42,34 @@
                             </div>
                             <div class="card-body">
                                 <section class="clean-block slider">
-                                    <table class="container text-center">
-                                        <table style= "width:100%">
-                                            <tr valign="top">
-                                                <th>1. </th>
-                                                <td> Gebe dem Repository einen Namen</td>
-                                            </tr>
-                                            <tr valign="top">
-                                                <th>2. </th>
-                                                <td> Beschreibe es wenn du willst</td>
-                                            </tr>
-                                            <tr valign="top">
-                                                <th >3. </th>
-                                                <td> Wähle <b>"Initialize this repository with a README"</b> nicht aus</td>
-                                            </tr>
+                                    <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                        <p>Der Datenspeicher wird in Form einer Textdatei gespeichert werden, somit muss zuerst ein Ordner (Repository) angelegt werden. In diesem Ordner werden später die verschiedenen Waschmaschinen als einzelne Textdateien angelegt werden.
+                                        </p>
+                                        <table class="table dataTable my-0" id="dataTable">
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Geben sie einen Namen für das Repository ein</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Wähle <b>"Initialize this repository with a README"</b> aus</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Sie können das Repository optional noch eine Beschreibung hinzufügen</td>
+                                                </tr>
+                                            </tbody>
                                         </table>
-                                    </table>
+                                    </div>
                                     <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
                                     <div class = "text-center">
-                                        <button class="btn btn-primary btn-xl js-scroll-trigger text-center" onclick= "window.open('https://github.com/new')"> Repository erstellen</button>
+                                        <a href="https://github.com/new"><button class="btn btn-primary btn-xl js-scroll-trigger text-center"> Repository erstellen</button></a>
                                     </div>
                                 </section>
                             </div>
                         </div>
                     </div>
-
 
                     <div class="col-lg-7 col-xl-8">
                         <div class="card shadow mb-4">
@@ -75,34 +78,37 @@
                             </div>
                             <div class="card-body">
                                 <section class="clean-block slider">
-                                    <table class="container text-center">
-                                        <table class="align-items-top" style="width:100%">
-                                            <tr valign="top">
-                                                <th>1. </th>
-                                                <td> Wähle <b>"Create new file"</b> in deinem Repository aus</td>
-                                            </tr>
-                                            <tr valign="top">
-                                                <th>2. </th>
-                                                <td>Benenne die Waschmaschine wie du willst</td>
-                                            </tr>
-                                            <tr valign="top">
-                                                <th>3. </th>
-                                                <td>Drücke <b>"Commit new file"</b> </td>
-                                            </tr>
-                                            <tr valign="top">
-                                                <th>4. </th>
-                                                <td>Wähle <b>"Raw"</b> bei deiner txt Datei aus</td>
-                                            </tr>
-                                            <tr valign="top">
-                                                <th>5. </th>
-                                                <td>Wähle das <img src="assets/img/tutorial/Knopf.png" width="28dp" height="28dp"> Symbol aus </td>
-                                            </tr>
-                                            <tr valign="top">
-                                                <th>6. </th>
-                                                <td>Wähle einen Namen und kopiere deinen Raw Link in das freie Feld und drücke den Knopf <b>"Waschmaschine hinzufügen"</b></td>
-                                            </tr>
+                                    <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                        <p>Diese App benötigt für das hinzufügen einer Waschmaschine einen Raw-Link dieser wird nach erzeugen der leeren Textdatei, durch klicken auf den Button "Raw" erzeugt. Kopiere dazu den Link in ihrer Suchleiste.</p>
+                                        <table class="table dataTable my-0" id="dataTable">
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Wähle <b>"Create new file"</b> in deinem Repository aus</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Gib der Waschmaschine einen Namen deiner Wahl</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Klicke <b>"Commit new file"</b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Wähle <b>"Raw"</b> um nur die Datei anzuzeigen</b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>Um eine neue Waschmaschine hinzuzufügen, klicke das <img class="rounded-circle mr-2" width="30" height="30" src="assets/img/tutorial/Knopf.png"> Symbol </b></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td>Wähle einen Namen deiner Wahl und kopiere den Raw-Link in das dafür vorgesehene Feld und klicke den Button <b>"Add"</b> um die Waschmaschine hinzufügen</td>
+                                                </tr>
+                                            </tbody>
                                         </table>
-                                    </table>
+                                    </div>
                                 </section>
                             </div>
                         </div>
