@@ -31,12 +31,6 @@ public class LoginFragment extends Fragment {
         //    }
         //}).show();
 
-        webView = (WebView) root.findViewById(R.id.webview_login);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("file:///android_asset/login.html");
-        WebSettings websettings = webView.getSettings();
-        websettings.setJavaScriptEnabled(true);
-
 
         return root;
     }
