@@ -11,6 +11,8 @@
     <script>
         var lautstärken = [0, 10, 40, 80, 110, 60, 20, 0, 0, 0, 100, 30, 50, 0, 0, 0];
         var zeiten = ["12:10", "13:10", "14:10", "15:10", "16:10", "17:10", "18:10", "19:10", "20:10", "21:10", "22:10", "23:10", "00:10", "01:10", "02:10", "03:10", "04:10", "05:10", "06:10", "07:10"];
+        var last = [15, 40, 70, 50, 80, 70, 5];
+        var verteilung0 = ["30", "60", "10"];
 
         var zwisch = "&quot;,&quot;";
         var chartteil1 = "<div class=\"chart-area\"><canvas data-bs-chart=\"{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;";                        
@@ -26,8 +28,7 @@
             chart += zwisch + lautstärken[index];
         }
         chart += chartteil3;
-    
-        var verteilung0 = ["30", "60", "10"];
+
         var verteilung1 = ["An", "Aus", "Störgeräusch"];
 
         var pi1 = "<div class=\"chart-area\"><canvas data-bs-chart=\"{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;";
@@ -47,7 +48,7 @@
          var pidot = "<div class=\"text-center small mt-4\"><span class=\"mr-2\"><i class=\"fas fa-circle \"></i>&nbsp;" + verteilung1[0] + "</span><span class=\"mr-2\"><i class=\"fas fa-circle dotcol2\"></i>&nbsp;" + verteilung1[1] + "</span><span class=\"mr-2\"><i class=\"fas fa-circle dotcol3\"></i>&nbsp;" + verteilung1[2] + "</span></div>";
 
         var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-        var last = [15, 40, 70, 50, 80, 70, 5];
+
         var color = ["dotcol7bg", "dotcol1bg", "dotcol5bg", "dotcol4bg", "dotcol2bg", "dotcol3bg", "dotcol6bg"];
 
 
@@ -64,12 +65,6 @@
         for (let index = 0; index < days.length; index++) {
             dl += dlstart + days[index] + dlmiddel1 + last[index] + dlmiddel2 + color[index%7]+ dlmiddel5 + last[index] + dlmiddel3 + last[index] + dlmiddel4 + last[index] + dlend;
         }
-
-
-
-
-
-
     </script>
 </head>
 
