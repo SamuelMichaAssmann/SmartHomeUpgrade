@@ -16,18 +16,11 @@ import com.example.smarthomeupgrade.R;
 
 public class TutorialFragment extends Fragment {
 
-    private TutorialViewModel tutorialViewModel;
-    private WebView webView;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        tutorialViewModel = ViewModelProviders.of(this).get(TutorialViewModel.class);
+        TutorialViewModel tutorialViewModel = ViewModelProviders.of(this).get(TutorialViewModel.class);
         View root = inflater.inflate(R.layout.fragment_tutorial, container, false);
 
-        webView = (WebView) root.findViewById(R.id.webview_home);
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.loadUrl("file:///android_asset/tutorial.html");
-        WebSettings websettings = webView.getSettings();
-        websettings.setJavaScriptEnabled(true);
         return root;
     }
 }

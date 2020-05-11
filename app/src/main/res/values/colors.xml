@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Toolbarfarbe-->
-    <color name="colorPrimary">#ff4400</color>
-    <color name="colorPrimaryDark">#D32F2F</color>
-    <color name="colorAccent">#F57C00</color>
+    <color name="colorred">#EB3D05</color>
+    <color name="colorbalken">#D32F2F</color>
+    <color name="colorblue">#1171DA</color>
+    <color name="colorgreen">#94DA06</color>
+    <color name="colorturquoise">#08AADC</color>
+    <color name="colorgrey">#787878</color>
+    <color name="colorpurple">#4e01df</color>
+    <color name="coloryellow">#FEC209</color>
+    <!--Farben ende-->
 </resources>
