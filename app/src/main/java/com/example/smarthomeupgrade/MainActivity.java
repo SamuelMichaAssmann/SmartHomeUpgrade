@@ -54,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //navController.navigate(R.id.nav_login);
-                WebLoadingTask test = new WebLoadingTask();
-                test.execute();
+                navController.navigate(R.id.nav_login);
 
             }
         });
@@ -78,35 +76,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 
-    class WebLoadingTask extends AsyncTask<Void, Void, Void>{
 
-
-    @SuppressLint("WrongThread")
-    @Override
-    protected Void doInBackground(Void... voids) {
-
-        try {
-            URL oracle = new URL("https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001");
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(oracle.openStream()));
-
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                Log.d("test",inputLine);
-
-            }
-            in.close();
-        } catch (Exception e) {
-            Log.d("test","Error occured",e);
-        }
-
-
-        return null;
-    }
-
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
-    }
-}
 }
