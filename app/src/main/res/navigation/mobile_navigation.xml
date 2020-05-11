@@ -9,19 +9,19 @@
         android:id="@+id/nav_home"
         android:name="com.example.smarthomeupgrade.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_html"/>
 
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.smarthomeupgrade.ui.stats.StatsFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_stats" />
+        tools:layout="@layout/fragment_html" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.smarthomeupgrade.ui.tutorial.TutorialFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_tutorial" />
+        tools:layout="@layout/fragment_html" />
 
     <fragment
         android:id="@+id/nav_login"
@@ -34,5 +34,7 @@
         android:name="com.example.smarthomeupgrade.ui.setting.SettingFragment"
         android:label="@string/setting_name"
         tools:layout="@layout/fragment_setting" />
+
+
 
 </navigation>
