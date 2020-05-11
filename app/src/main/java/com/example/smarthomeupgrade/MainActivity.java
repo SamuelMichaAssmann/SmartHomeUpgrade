@@ -77,25 +77,25 @@ public class MainActivity extends AppCompatActivity {
     public class doit extends AsyncTask<Void, Void, Void>{
 
 
-        @SuppressLint("WrongThread")
-        @Override
-        protected Void doInBackground(Void... voids) {
+    @SuppressLint("WrongThread")
+    @Override
+    protected Void doInBackground(Void... voids) {
 
-            Document doc = null;
-            try {
-                doc = (Document) Jsoup.connect("https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001").get();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            text = doc.getDocumentURI();
-
-
-            return null;
+        Document doc = null;
+        try {
+            doc = (Document) Jsoup.connect("https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001").get();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        text = doc.getDocumentURI();
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-        }
+
+        return null;
     }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+    }
+}
 }
