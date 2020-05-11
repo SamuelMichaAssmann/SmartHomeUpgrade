@@ -26,7 +26,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     String text = "Hallo";
     TextView txt;
-
+    
 
     private AppBarConfiguration mAppBarConfiguration;
 

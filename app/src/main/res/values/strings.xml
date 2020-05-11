@@ -15,5 +15,8 @@
     <string name="home_second">Home Second</string>
     <string name="setting">Reset</string>
     <string name="setting_name">Setting</string>
+    <string name="add">Add</string>
+    <string name="link">Link</string>
+    <string name="name">Name</string>
 
 </resources>
