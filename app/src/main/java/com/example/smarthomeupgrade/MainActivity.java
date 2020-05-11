@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -55,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 navController.navigate(R.id.nav_login);
-
             }
         });
 
@@ -64,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
 
         return true;
     }
@@ -76,5 +78,24 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
 
+        switch (item.getItemId()){
+            case R.id.nav_main_sett:
+                navController.navigate(R.id.nav_set);
+                return true;
+            case R.id.nav_main_opt:
+                navController.navigate(R.id.nav_home);
+                return true;
+            case R.id.nav_main_team:
+                navController.navigate(R.id.nav_gallery);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

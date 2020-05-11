@@ -5,12 +5,18 @@
     tools:showIn="navigation_view">
 
     <item
-        android:id="@+id/nav_home"
-        android:title="@string/menu_home"
+        android:id="@+id/nav_main_sett"
+        android:title="@string/setting_name"
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/nav_sett"
-        android:title="@string/setting_name" />
+        android:id="@+id/nav_main_opt"
+        android:title="@string/options"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/nav_main_team"
+        android:title="@string/team"
+        app:showAsAction="never"/>
 
 </menu>
