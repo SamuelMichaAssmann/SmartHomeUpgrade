@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //navController.navigate(R.id.nav_login);
+                navController.navigate(R.id.nav_login);
                 WebLoadingTask test = new WebLoadingTask();
                 test.execute();
 
