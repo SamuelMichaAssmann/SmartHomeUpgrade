@@ -27,6 +27,6 @@
         android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColorHighlight="#F44336"
-        android:textColorLink="#E91E63" />
+        android:textColorLink="#E64A19" />
 
 </LinearLayout>
