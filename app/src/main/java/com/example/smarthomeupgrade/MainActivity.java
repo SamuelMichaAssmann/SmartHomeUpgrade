@@ -3,6 +3,7 @@ package com.example.smarthomeupgrade;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
@@ -18,10 +19,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import org.jsoup.Jsoup;
-import org.w3c.dom.Document;
-
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     String text = "Hallo";
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("test","starting");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.nav_login);
+                //navController.navigate(R.id.nav_login);
+                WebLoadingTask test = new WebLoadingTask();
+                test.execute();
+
             }
         });
 
@@ -74,20 +78,27 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
 
-    public class doit extends AsyncTask<Void, Void, Void>{
+    class WebLoadingTask extends AsyncTask<Void, Void, Void>{
 
 
     @SuppressLint("WrongThread")
     @Override
     protected Void doInBackground(Void... voids) {
 
-        Document doc = null;
         try {
-            doc = (Document) Jsoup.connect("https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001").get();
-        } catch (IOException e) {
-            e.printStackTrace();
+            URL oracle = new URL("https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(oracle.openStream()));
+
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                Log.d("test",inputLine);
+
+            }
+            in.close();
+        } catch (Exception e) {
+            Log.d("test","Error occured",e);
         }
-        text = doc.getDocumentURI();
 
 
         return null;
