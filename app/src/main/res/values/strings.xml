@@ -13,5 +13,7 @@
     <string name="menu_test">Login</string>
 
     <string name="home_second">Home Second</string>
+    <string name="setting">Reset</string>
+    <string name="setting_name">Setting</string>
 
 </resources>

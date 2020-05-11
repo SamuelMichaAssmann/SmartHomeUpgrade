@@ -24,8 +24,15 @@
         tools:layout="@layout/fragment_tutorial" />
 
     <fragment
-        android:id="@+id/nav_test"
+        android:id="@+id/nav_login"
         android:name="com.example.smarthomeupgrade.ui.login.LoginFragment"
         android:label="@string/menu_test"
         tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/nav_set"
+        android:name="com.example.smarthomeupgrade.ui.setting.SettingFragment"
+        android:label="@string/setting_name"
+        tools:layout="@layout/fragment_setting" />
+
 </navigation>
