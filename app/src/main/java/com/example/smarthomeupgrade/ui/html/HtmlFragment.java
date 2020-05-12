@@ -19,14 +19,9 @@ public class HtmlFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         HtmlViewModel = ViewModelProviders.of(this).get(HtmlViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_setting, container, false);
+        View root = inflater.inflate(R.layout.fragment_html, container, false);
 
-        //Snackbar.make(view, "text", Snackbar.LENGTH_LONG).setAction("Action", new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
 
-        //    }
-        //}).show();
 
         return root;
     }
