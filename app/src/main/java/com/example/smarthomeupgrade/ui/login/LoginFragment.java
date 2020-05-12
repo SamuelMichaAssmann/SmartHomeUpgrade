@@ -1,29 +1,33 @@
 package com.example.smarthomeupgrade.ui.login;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.smarthomeupgrade.R;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LoginFragment extends Fragment {
 
@@ -34,57 +38,153 @@ public class LoginFragment extends Fragment {
         LoginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_login, container, false);
 
+
         Button commit = root.findViewById(R.id.button_add);
         commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(root, "starting connection...", Snackbar.LENGTH_LONG).show();
-                WebLoadingTask webLoadingTask = new WebLoadingTask();
-                webLoadingTask.execute();
+                //https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001 test link
+                EditText github = root.findViewById(R.id.editText);
+                EditText filepath = root.findViewById(R.id.editText2);
+                Log.d("test","got Link: " + github.getText().toString());
+                Snackbar.make(root, "starting connection...", Snackbar.LENGTH_SHORT).show();
+                if(github.getText().toString().equals("debug")){
+                    Log.d("test","debugging Dataset");
+                    Dataset webLoadingTask = new Dataset(root, root.getContext(),filepath.getText().toString() + ".txt");
+                    webLoadingTask.execute();
+                } else {
+                    Dataset webLoadingTask = new Dataset(root, github.getText().toString(), root.getContext(), filepath.getText().toString() + ".txt");
+                    webLoadingTask.execute();
+                }
+
             }
         });
-
 
 
         return root;
     }
 
-    class WebLoadingTask extends AsyncTask<Void, Void, Void> {
+    class Dataset extends AsyncTask<Void, Void, Void> {
 
-        ArrayList<ListElement> contents = new ArrayList();
+        private String URL;
+        private String commonSave = "savedDatasets.txt";
+        private String filename = "last_pull.txt";
+        private Boolean is_offline = false;
+        private Context rootContext;
+        private View root;
+
+        public Dataset(View root, String URL, Context context){
+            super();
+            this.root = root;
+            this.URL = URL;
+            this.rootContext = context;
+        }
+
+        public Dataset(View root, String URL, Context context, String filename){
+            super();
+            this.root = root;
+            this.filename = filename;
+            this.URL = URL;
+            this.rootContext = context;
+        }
+
+        public Dataset(View root, Context context, String filename){
+            super();
+            this.root = root;
+            this.is_offline = true;
+            this.filename = filename;
+            this.rootContext = context;
+
+        }
+
+        EntryList contents = new EntryList();
+
+        private void writeToFile(String data, Context context) {
+
+            Log.d("WebLoadingTask" ,"Starting to write to file: " + filename);
+            Log.d("WebLoadingTask" ,"data:\n" + data);
+            try {
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
+                outputStreamWriter.write(data);
+                outputStreamWriter.close();
+            }
+            catch (IOException e) {
+                Log.e("Exception", "File write failed: " + e.toString());
+            }
+        }
+
+        private BufferedReader connectToFile(Context context) {
+            try {
+                InputStream inputStream = context.openFileInput(filename);
+
+                if ( inputStream != null ) {
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    return new BufferedReader(inputStreamReader);
+
+                }
+            }
+            catch (FileNotFoundException e) {
+                Log.e("login activity", "File not found: " + e.toString());
+            }
+            return null;
+        }
 
         @SuppressLint("WrongThread")
         @Override
         protected Void doInBackground(Void... voids) {
+            Log.d("WebLoadingTask", "path to Files: " + rootContext.getFilesDir());
 
             try {
+                BufferedReader in;
                 Log.d("WebLoadingTask","starting download");
-                URL oracle = new URL("https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001");
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(oracle.openStream()));
-
+                if (!is_offline) {
+                    URL file = new URL(this.URL);
+                    in = new BufferedReader(
+                            new InputStreamReader(file.openStream()));
+                } else {
+                    in = connectToFile(rootContext);
+                }
                 String inputLine = in.readLine();
                 if( !isValidSource(inputLine) ) {
                     Log.d("WebLoadingTask","Given Link is not a Valid Site: 1st Line: |" + inputLine+"|");
-                    //return null;
+                    Snackbar.make(root,"Please make sure to enter a Valid site." , BaseTransientBottomBar.LENGTH_LONG).show();
+                    return null;
                 }
                 while ((inputLine = in.readLine()) != null) {
                     contents.add(new ListElement(inputLine));
-                    Log.d("WebLoadingTask","read line" + inputLine);
+                    Log.d("WebLoadingTask","reading line: " + inputLine);
 
                 }
+                Log.d("DatasetImport", "Imported:\n" + contents.toString());
                 in.close();
             } catch (Exception e) {
                 Log.d("WebLoadingTask","Error occured", e );
+                Snackbar.make(root,"Oh oh, something went terribly wrong." , BaseTransientBottomBar.LENGTH_LONG).show();
+                return null;
+            }
+            if(contents.isEmpty()){
+                Log.d("WebloadingTask", "No Data found on Site, something must've gone wrong.");
+                Snackbar.make(root,"No Data found on Site, something must've gone wrong." , BaseTransientBottomBar.LENGTH_LONG).show();
+                return null;
             }
 
+            if(!is_offline)
+                writeToFile( contents.getRawText(), rootContext);
 
+            Snackbar.make(root,"imported " + contents.size() + " entries, saved to " + filename, BaseTransientBottomBar.LENGTH_LONG).show();
+            contents.test();
             return null;
         }
 
         private boolean isValidSource(String firstLine){
-            if(firstLine == "#SmarthomeUpgradeFile#") return true;
-            return false;
+            Log.d("WebloadingTask","validating source: "+ firstLine);
+            if("#SmarthomeUpgradeFile#".equals(firstLine)) {
+                Log.d("WebloadingTask","validation successful");
+                return true;
+            } else {
+                Log.d("WebloadingTask","validation failed");
+                return false;
+            }
         }
 
 
@@ -151,5 +251,87 @@ public class LoginFragment extends Fragment {
         public String toString() {
             return "Element: <Date: " + date + ", Time: " + time + ", State: " + state + ", Dezibel: " + dezibel + ">";
         }
+
+        public String getRawText(){
+            if(state)
+                return date + "#" + time + "#1#" + dezibel + "dB";
+            else
+                return date + "#" + time + "#0#" + dezibel + "dB";
+        }
+    }
+
+    class EntryList extends ArrayList<ListElement> {
+
+        public void test(){
+            Log.d("EntryListUtils", "testing methods:" +
+                    "\ngetAllDates()    -> " + getAllDates() +
+                    "\ngetAllTimes()    -> " + getAllTimes() +
+                    "\ngetAllDezibels() -> " + getAllDezibels() +
+                    "\ngetAllStates()   -> " + getAllStates()
+            );
+        }
+
+        public String getAllDates(){
+            if(this.isEmpty())
+                return "[ ]";
+            String out = "[ " + this.get(0);
+            for (int i = 1; i < this.size(); i++){
+                out = out + ", " + "\"" + this.get(i).getDate() + "\"";
+            }
+            return out + "]";
+        }
+
+        public String getAllTimes(){
+            if(this.isEmpty())
+                return "[ ]";
+            String out = "[ " + this.get(0);
+            for (int i = 1; i < this.size(); i++){
+                out =  out + ", " + "\"" + this.get(i).getTime() + "\"";
+            }
+            return out + "]";
+        }
+
+        public String getAllDezibels(){
+            if(this.isEmpty())
+                return "[ ]";
+            String out = "[ " + this.get(0);
+            for (int i = 1; i < this.size(); i++){
+                out = out + ", " + this.get(i).getDezibel();
+            }
+            return out + "]";
+        }
+
+        public String getAllStates(){
+            if(this.isEmpty())
+                return "[ ]";
+            String out = "[ " + this.get(0);
+            for (int i = 1; i < this.size(); i++){
+                if(this.get(i).getState())
+                    out = out + ", True";
+                else
+                    out = out + ", False";
+            }
+            return out + "]";
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            String out = "Entry List, len = " + this.size() + ", containing:\n";
+            for (int i = 0; i < this.size(); i++){
+                out = out + "     " + this.get(i) + "\n";
+            }
+            return out;
+        }
+
+        public String getRawText() {
+            String out = "#SmarthomeUpgradeFile#\n";
+            ArrayList<ListElement> self = (ArrayList<ListElement>) this;
+            for (int i = 0; i < self.size(); i++){
+                out = out + self.get(i).getRawText() + "\n";
+            }
+            return out;
+        }
+
     }
 }
