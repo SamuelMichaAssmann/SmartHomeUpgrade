@@ -16,7 +16,30 @@
 
     <item
         android:id="@+id/nav_main_team"
-        android:title="@string/team"
-        app:showAsAction="never"/>
+        android:title="@string/uber"
+        app:showAsAction="never">
 
+        <menu>
+            <item
+                android:id="@+id/nav_main_datasave"
+                android:title="@string/datenschutzrichtlinie"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/nav_main_usetime"
+                android:title="@string/nutzungsbedingungen"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/nav_main_lizenz"
+                android:title="@string/lizenz"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/nav_main_version"
+                android:title="@string/version"
+                app:showAsAction="never"/>
+        </menu>
+
+    </item>
 </menu>

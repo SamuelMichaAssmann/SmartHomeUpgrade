@@ -23,5 +23,10 @@
     <string name="add_waschingmaschine">Add Waschingmaschine</string>
     <string name="option">Option</string>
     <string name="setup">Setup</string>
+    <string name="uber">Über</string>
+    <string name="version">Version 1.0.0</string>
+    <string name="lizenz">Lizenz</string>
+    <string name="nutzungsbedingungen">Nutzungsbedingungen</string>
+    <string name="datenschutzrichtlinie">Datenschutzrichtlinie</string>
 
 </resources>

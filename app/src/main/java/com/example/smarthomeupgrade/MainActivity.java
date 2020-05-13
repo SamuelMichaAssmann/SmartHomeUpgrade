@@ -27,8 +27,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
-    String text = "Hallo";
-    TextView txt;
     
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -92,8 +90,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_main_opt:
                 navController.navigate(R.id.nav_opt);
                 return true;
-            case R.id.nav_main_team:
-                navController.navigate(R.id.nav_team);
+            case R.id.nav_main_datasave:
+                navController.navigate(R.id.nav_data);
+                return true;
+            case R.id.nav_main_usetime:
+                navController.navigate(R.id.nav_nuz);
+                return true;
+            case R.id.nav_main_lizenz:
+                navController.navigate(R.id.nav_liz);
                 return true;
         }
         return super.onOptionsItemSelected(item);
