@@ -21,5 +21,7 @@
     <string name="options">Options</string>
     <string name="team">Team</string>
     <string name="add_waschingmaschine">Add Waschingmaschine</string>
+    <string name="option">Option</string>
+    <string name="setup">Setup</string>
 
 </resources>

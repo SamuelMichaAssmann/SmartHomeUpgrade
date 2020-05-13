@@ -90,10 +90,10 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.nav_set);
                 return true;
             case R.id.nav_main_opt:
-                navController.navigate(R.id.nav_home);
+                navController.navigate(R.id.nav_opt);
                 return true;
             case R.id.nav_main_team:
-                navController.navigate(R.id.nav_gallery);
+                navController.navigate(R.id.nav_team);
                 return true;
         }
         return super.onOptionsItemSelected(item);

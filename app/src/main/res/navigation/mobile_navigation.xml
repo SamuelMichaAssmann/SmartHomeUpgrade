@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/nav_login"
         android:name="com.example.smarthomeupgrade.ui.login.LoginFragment"
-        android:label="@string/menu_test"
+        android:label="@string/setup"
         tools:layout="@layout/fragment_login" />
 
     <fragment
@@ -34,6 +34,18 @@
         android:name="com.example.smarthomeupgrade.ui.setting.SettingFragment"
         android:label="@string/setting_name"
         tools:layout="@layout/fragment_setting" />
+
+    <fragment
+        android:id="@+id/nav_team"
+        android:name="com.example.smarthomeupgrade.ui.team.TeamFragment"
+        android:label="@string/team"
+        tools:layout="@layout/fragment_html" />
+
+    <fragment
+        android:id="@+id/nav_opt"
+        android:name="com.example.smarthomeupgrade.ui.options.OptionFragment"
+        android:label="@string/option"
+        tools:layout="@layout/fragment_option" />
 
 
 
