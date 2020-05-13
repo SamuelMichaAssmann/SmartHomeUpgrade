@@ -52,6 +52,7 @@
         android:textColor="@android:color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listview"
         android:layout_width="307dp"
         android:layout_height="347dp"
         android:layout_below="@+id/button_add"
