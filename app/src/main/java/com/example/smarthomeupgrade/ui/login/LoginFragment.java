@@ -54,8 +54,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001 test link
-                EditText github = root.findViewById(R.id.text_name);
-                EditText filepath = root.findViewById(R.id.text_link);
+                EditText github = root.findViewById(R.id.text_link);
+                EditText filepath = root.findViewById(R.id.text_name);
                 Log.d("test","got Link: " + github.getText().toString());
                 Snackbar.make(root, "starting connection...", Snackbar.LENGTH_SHORT).show();
                 if(github.getText().toString().equals("debug")){
@@ -181,7 +181,7 @@ public class LoginFragment extends Fragment {
             if(!is_offline)
                 writeToFile( contents.getRawText(), rootContext);
 
-            Snackbar.make(root,"imported " + contents.size() + " entries, saved to " + filename, BaseTransientBottomBar.LENGTH_LONG).show();
+            Snackbar.make(root,"imported " + contents.size() + " entries, corresponding file: " + filename, BaseTransientBottomBar.LENGTH_LONG).show();
             contents.test();
             return null;
         }
@@ -226,7 +226,7 @@ public class LoginFragment extends Fragment {
                 }
                 time = time + in.charAt(i);
             }
-            if(in.charAt(temp + 1 ) == 1){
+            if(in.charAt(temp + 1 ) == '1'){
                 state = true;
             } else {
                 state = false;
@@ -284,9 +284,9 @@ public class LoginFragment extends Fragment {
         public String getAllDates(){
             if(this.isEmpty())
                 return "[ ]";
-            String out = "[ " + this.get(0);
-            for (int i = 1; i < this.size(); i++){
-                out = out + ", " + "\"" + this.get(i).getDate() + "\"";
+            String out = "[ " + "\"" + this.get(this.size() - 1).getDate() + "\"";
+            for (int i = 2; i < this.size() && i < 14; i++){
+                out = out + ", " + "\"" + this.get(this.size() - i).getDate() + "\"";
             }
             return out + "]";
         }
@@ -294,9 +294,9 @@ public class LoginFragment extends Fragment {
         public String getAllTimes(){
             if(this.isEmpty())
                 return "[ ]";
-            String out = "[ " + this.get(0);
-            for (int i = 1; i < this.size(); i++){
-                out =  out + ", " + "\"" + this.get(i).getTime() + "\"";
+            String out = "[ " + "\"" + this.get(this.size() - 1).getTime() + "\"";
+            for (int i = 2; i < this.size() && i < 14; i++){
+                out =  out + ", " + "\"" + this.get(this.size() - i).getTime() + "\"";
             }
             return out + "]";
         }
@@ -304,9 +304,9 @@ public class LoginFragment extends Fragment {
         public String getAllDezibels(){
             if(this.isEmpty())
                 return "[ ]";
-            String out = "[ " + this.get(0);
-            for (int i = 1; i < this.size(); i++){
-                out = out + ", " + this.get(i).getDezibel();
+            String out = "[ " + this.get(this.size() - 1).getDezibel();
+            for (int i = 2; i < this.size() && i < 14; i++){
+                out = out + ", " + this.get(this.size() - i).getDezibel();
             }
             return out + "]";
         }
@@ -314,9 +314,14 @@ public class LoginFragment extends Fragment {
         public String getAllStates(){
             if(this.isEmpty())
                 return "[ ]";
-            String out = "[ " + this.get(0);
-            for (int i = 1; i < this.size(); i++){
-                if(this.get(i).getState())
+            String out = "[ ";
+            if(this.get(this.size() - 1).getState()){
+                out = out + "True";
+            } else {
+                out = out + "False";
+            }
+            for (int i = 2; i < this.size() && i < 14; i++){
+                if(this.get(this.size() - i).getState())
                     out = out + ", True";
                 else
                     out = out + ", False";
@@ -336,9 +341,8 @@ public class LoginFragment extends Fragment {
 
         public String getRawText() {
             String out = "#SmarthomeUpgradeFile#\n";
-            ArrayList<ListElement> self = (ArrayList<ListElement>) this;
-            for (int i = 0; i < self.size(); i++){
-                out = out + self.get(i).getRawText() + "\n";
+            for (int i = 0; i < this.size(); i++){
+                out = out + this.get(i).getRawText() + "\n";
             }
             return out;
         }
