@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,6 +20,12 @@ public class DatenschutzFragment extends Fragment {
         HtmlViewModel htmlViewModel = ViewModelProviders.of(this).get(HtmlViewModel.class);
         View root = inflater.inflate(R.layout.fragment_html, container, false);
 
+
+        WebView webView = (WebView) root.findViewById(R.id.webview_home);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("file:///android_asset/datenschutz.html");
+        WebSettings websettings = webView.getSettings();
+        websettings.setJavaScriptEnabled(true);
         return root;
     }
 }
