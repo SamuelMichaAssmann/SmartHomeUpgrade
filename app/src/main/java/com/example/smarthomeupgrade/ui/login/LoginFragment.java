@@ -48,22 +48,16 @@ public class LoginFragment extends Fragment {
         com.example.smarthomeupgrade.ui.login.LoginViewModel loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_login, container, false);
 
-        ArrayList<String> test = SHUFileUtilities.readAssetFile(root.getContext(),"stats.html");
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < test.size(); i++){
-            sb.append(test.get(i));
-        }
 
-        SHUFileUtilities.writeToFile(sb.toString(),root.getContext(),"stats.html");
 
 
         WebView webView = (WebView) root.findViewById(R.id.txt);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(Uri.parse("file://" + root.getContext().getFilesDir() + "/stats.html").toString());
+        webView.loadUrl("file:///android_asset/login.html");
         WebSettings websettings = webView.getSettings();
         webView.setBackgroundColor(Color.TRANSPARENT);
         websettings.setJavaScriptEnabled(true);
-        Log.d("test","url : " + root.getContext().getFilesDir() + "/stats.html");
+
 
 
         //list = root.findViewById(R.id.listview);

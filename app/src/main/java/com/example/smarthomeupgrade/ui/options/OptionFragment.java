@@ -41,7 +41,7 @@ public class OptionFragment extends Fragment {
 
         WebView webView = (WebView) root.findViewById(R.id.webview_home);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("");
+        webView.loadUrl("file:///android_asset/options.html");
         WebSettings websettings = webView.getSettings();
         webView.setBackgroundColor(Color.TRANSPARENT);
         websettings.setJavaScriptEnabled(true);
