@@ -14,14 +14,14 @@
 
     <string name="home_second">Home Second</string>
     <string name="setting">Reset</string>
-    <string name="setting_name">Setting</string>
+    <string name="setting_name">Settings</string>
     <string name="add">Add</string>
     <string name="link">Link</string>
     <string name="name">Name</string>
     <string name="options">Options</string>
     <string name="team">Team</string>
     <string name="add_waschingmaschine">Add Waschingmaschine</string>
-    <string name="option">Option</string>
+    <string name="option">Options</string>
     <string name="setup">Setup</string>
     <string name="uber">Über</string>
     <string name="version">Version 1.0.0</string>

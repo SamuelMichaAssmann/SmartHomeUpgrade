@@ -22,7 +22,7 @@ public class LizenzFragment extends Fragment {
 
         WebView webView = (WebView) root.findViewById(R.id.webview_home);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("file:///android_asset/stats.html");
+        webView.loadUrl("file:///android_asset/lizenz.html");
         WebSettings websettings = webView.getSettings();
         websettings.setJavaScriptEnabled(true);
 
