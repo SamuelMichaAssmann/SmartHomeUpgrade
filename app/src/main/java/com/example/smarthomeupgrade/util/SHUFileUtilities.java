@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 
 public class SHUFileUtilities {
     public static void writeToFile(String data, Context context, String filename) {
-        replaceData(data,filename);
+        //replaceData(data,filename);
 
         Log.d("Read/WriteUtil", "Starting to write to file: " + filename);
         Log.d("Read/WriteUtil", "data:\n" + data);
@@ -39,18 +40,20 @@ public class SHUFileUtilities {
         }
     }
 
-    public static ArrayList<String> readAssetFile(Context context, String filename) {
-        ArrayList<String> out = new ArrayList<>();
+
+
+    public static String readAssetFile(Context context, String filename) {
+        String out = "";
         try {
             InputStream inputStream = context.getAssets().open(filename);
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 String receiveString = "";
-                out.add(bufferedReader.readLine());
+                out = bufferedReader.readLine();
                 while ((receiveString = bufferedReader.readLine()) != null) {
-                    out.add("\n");
-                    out.add(receiveString);
+                    out = out + "\n";
+                    out = out + receiveString;
                 }
 
                 inputStream.close();
@@ -63,7 +66,7 @@ public class SHUFileUtilities {
     }
 
 
-    public static void replaceData(String data, String filename) {
+    public static void replaceData(View root, Context context, String data, String filename) {
 
         if (filename.equals("home.html")) {
 

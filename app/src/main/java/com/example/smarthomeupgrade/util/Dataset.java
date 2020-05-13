@@ -21,11 +21,12 @@ import java.net.URL;
 public class Dataset extends AsyncTask<Void, Void, Void> {
 
     private String URL;
-    private String commonSave = "savedDatasets.txt";
+    private static final String commonSave = "savedDatasets.txt";
     private String filename = "last_pull.txt";
     private Boolean is_offline = false;
     private Context rootContext;
     private View root;
+    private boolean finished = false;
 
     public Dataset(View root, String URL, Context context){
         super();
@@ -84,8 +85,21 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
     }
 
     private void updateHtml(){
-        //rootContext.getApplicationContext().getResources().getAssets().
+        String home = SHUFileUtilities.readAssetFile(rootContext,"home.html");
+        String[] repArr_home = new String[2];
+        repArr_home[0] = contents.getAllStates();
+        String stats = SHUFileUtilities.readAssetFile(rootContext,"stats.html");
+        String newHome = SHUFileUtilities.ersetze(home,repArr_home);
+        SHUFileUtilities.writeToFile(newHome,rootContext,"home.html");
+
+        String[] repArr_stats = new String[2];
+        repArr_stats[0] = contents.getAllDezibels();
+        repArr_stats[1] = contents.getAllTimes();
+        String newStats = SHUFileUtilities.ersetze(stats,repArr_stats);
+        SHUFileUtilities.writeToFile(newHome,rootContext,"stats.html");
     }
+
+
 
     @SuppressLint("WrongThread")
     @Override
@@ -130,7 +144,9 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
             writeToFile( contents.getRawText(), rootContext);
 
         Snackbar.make(root,"imported " + contents.size() + " entries, corresponding file: " + filename, BaseTransientBottomBar.LENGTH_LONG).show();
-        contents.test();
+        //contents.test();
+        updateHtml();
+        finished = true;
         return null;
     }
 

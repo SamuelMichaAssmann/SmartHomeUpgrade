@@ -33,15 +33,6 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_html, container, false);
 
 
-        ArrayList<String> test = SHUFileUtilities.readAssetFile(root.getContext(),"home.html");
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < test.size(); i++){
-            sb.append(test.get(i));
-        }
-
-        SHUFileUtilities.writeToFile(sb.toString(),root.getContext(),"home.html");
-
-
         WebView webView = (WebView) root.findViewById(R.id.webview_home);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(Uri.parse("file://" + root.getContext().getFilesDir() + "/home.html").toString());
