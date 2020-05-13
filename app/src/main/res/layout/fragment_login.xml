@@ -51,5 +51,12 @@
         android:text="@string/add"
         android:textColor="@android:color/white" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="307dp"
+        android:layout_height="347dp"
+        android:layout_below="@+id/button_add"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="81dp" />
+
 
 </RelativeLayout>
