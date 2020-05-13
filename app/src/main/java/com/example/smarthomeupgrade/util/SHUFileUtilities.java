@@ -9,12 +9,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 public class SHUFileUtilities {
-    private void writeToFile(String data, Context context, String filename) {
+    public static void writeToFile(String data, Context context, String filename) {
 
-        Log.d("WebLoadingTask" ,"Starting to write to file: " + filename);
-        Log.d("WebLoadingTask" ,"data:\n" + data);
+        Log.d("Read/WriteUtil" ,"Starting to write to file: " + filename);
+        Log.d("Read/WriteUtil" ,"data:\n" + data);
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
@@ -25,19 +26,27 @@ public class SHUFileUtilities {
         }
     }
 
-    private BufferedReader connectToFile(Context context, String filename) {
+    public static ArrayList<String> readAssetFile(Context context, String filename) {
+        ArrayList<String> out = new ArrayList<>();
         try {
-            InputStream inputStream = context.openFileInput(filename);
-
+            InputStream inputStream = context.getAssets().open(filename);
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                return new BufferedReader(inputStreamReader);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                out.add(bufferedReader.readLine());
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    out.add("\n");
+                    out.add(receiveString);
+                }
+
+                inputStream.close();
 
             }
         }
-        catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
+        catch (Exception e) {
+            Log.e("Read/WriteUtil", "File not found: " + e.toString());
         }
-        return null;
+        return out;
     }
 }
