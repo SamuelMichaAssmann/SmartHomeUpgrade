@@ -54,8 +54,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001 test link
-                EditText github = root.findViewById(R.id.
-                EditText filepath = root.findViewById(R.id.);
+                EditText github = root.findViewById(R.id.text_name);
+                EditText filepath = root.findViewById(R.id.text_link);
                 Log.d("test","got Link: " + github.getText().toString());
                 Snackbar.make(root, "starting connection...", Snackbar.LENGTH_SHORT).show();
                 if(github.getText().toString().equals("debug")){
