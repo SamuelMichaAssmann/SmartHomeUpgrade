@@ -1,6 +1,9 @@
 package com.example.smarthomeupgrade.ui.stats;
 
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.smarthomeupgrade.R;
+import com.example.smarthomeupgrade.util.SHUFileUtilities;
+
+import java.util.ArrayList;
 
 public class StatsFragment extends Fragment {
 
@@ -20,11 +26,24 @@ public class StatsFragment extends Fragment {
         StatsViewModel statsViewModel = ViewModelProviders.of(this).get(StatsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_html, container, false);
 
+
+        ArrayList<String> test = SHUFileUtilities.readAssetFile(root.getContext(),"stats.html");
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < test.size(); i++){
+            sb.append(test.get(i));
+        }
+
+        SHUFileUtilities.writeToFile(sb.toString(),root.getContext(),"stats.html");
+
+
         WebView webView = (WebView) root.findViewById(R.id.webview_home);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("file:///android_asset/stats.html");
+        webView.loadUrl(Uri.parse("file://" + root.getContext().getFilesDir() + "/stats.html").toString());
         WebSettings websettings = webView.getSettings();
+        webView.setBackgroundColor(Color.TRANSPARENT);
         websettings.setJavaScriptEnabled(true);
+        Log.d("test","url : " + root.getContext().getFilesDir() + "/stats.html");
+
         return root;
     }
 }

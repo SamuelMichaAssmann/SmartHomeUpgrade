@@ -1,7 +1,10 @@
 package com.example.smarthomeupgrade.ui.home;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.smarthomeupgrade.R;
+import com.example.smarthomeupgrade.util.SHUFileUtilities;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
@@ -28,11 +34,24 @@ public class HomeFragment extends Fragment {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_html, container, false);
 
-        webView = (WebView) root.findViewById(R.id.webview_home);
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.loadUrl("file:///android_asset/home.html");
+
+        ArrayList<String> test = SHUFileUtilities.readAssetFile(root.getContext(),"home.html");
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < test.size(); i++){
+            sb.append(test.get(i));
+        }
+
+        SHUFileUtilities.writeToFile(sb.toString(),root.getContext(),"home.html");
+
+
+        WebView webView = (WebView) root.findViewById(R.id.webview_home);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl(Uri.parse("file://" + root.getContext().getFilesDir() + "/home.html").toString());
         WebSettings websettings = webView.getSettings();
+        webView.setBackgroundColor(Color.TRANSPARENT);
         websettings.setJavaScriptEnabled(true);
+        Log.d("test","url : " + root.getContext().getFilesDir() + "/home.html");
+
         return root;
     }
 }

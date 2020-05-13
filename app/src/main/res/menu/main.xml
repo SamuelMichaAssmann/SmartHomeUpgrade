@@ -11,7 +11,7 @@
 
     <item
         android:id="@+id/nav_main_opt"
-        android:title="For Tests"
+        android:title="@string/options"
         app:showAsAction="never"/>
 
     <item
