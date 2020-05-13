@@ -1,6 +1,7 @@
 package com.example.smarthomeupgrade.ui.login;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,12 +28,18 @@ import java.util.List;
 
 public class LoginFragment extends Fragment {
 
-    private LoginViewModel LoginViewModel;
-    private WebView webView;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        LoginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        com.example.smarthomeupgrade.ui.login.LoginViewModel loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_login, container, false);
+
+
+        WebView webView = (WebView) root.findViewById(R.id.txt);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("file:///android_asset/login.html");
+        WebSettings websettings = webView.getSettings();
+        webView.setBackgroundColor(Color.TRANSPARENT);
+        websettings.setJavaScriptEnabled(true);
+
 
         Button commit = root.findViewById(R.id.button_add);
         commit.setOnClickListener(new View.OnClickListener() {

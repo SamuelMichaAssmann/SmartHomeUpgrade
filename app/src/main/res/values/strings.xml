@@ -20,5 +20,6 @@
     <string name="name">Name</string>
     <string name="options">Options</string>
     <string name="team">Team</string>
+    <string name="add_waschingmaschine">Add Waschingmaschine</string>
 
 </resources>
