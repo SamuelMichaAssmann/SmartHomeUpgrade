@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smarthomeupgrade.R;
+import com.example.smarthomeupgrade.util.ManageAssetFolders;
 import com.example.smarthomeupgrade.util.SHUFileUtilities;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -49,7 +50,8 @@ public class LoginFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_login, container, false);
 
 
-
+        ManageAssetFolders manageAssetFolders = new ManageAssetFolders(root.getContext());
+        manageAssetFolders.execute();
 
         WebView webView = (WebView) root.findViewById(R.id.txt);
         webView.setWebViewClient(new WebViewClient());
