@@ -18,6 +18,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smarthomeupgrade.R;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -34,6 +36,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginFragment extends Fragment {
+    private View root;
+    private RecyclerView list;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         com.example.smarthomeupgrade.ui.login.LoginViewModel loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
@@ -47,6 +54,10 @@ public class LoginFragment extends Fragment {
         webView.setBackgroundColor(Color.TRANSPARENT);
         websettings.setJavaScriptEnabled(true);
 
+
+        list = root.findViewById(R.id.listview);
+        layoutManager = new LinearLayoutManager(root.getContext());
+        list.setLayoutManager(layoutManager);
 
 
         Button commit = root.findViewById(R.id.button_add);
@@ -137,6 +148,10 @@ public class LoginFragment extends Fragment {
                 Log.e("login activity", "File not found: " + e.toString());
             }
             return null;
+        }
+
+        private void updateHtml(){
+            //rootContext.getApplicationContext().getResources().getAssets().
         }
 
         @SuppressLint("WrongThread")
@@ -348,4 +363,5 @@ public class LoginFragment extends Fragment {
         }
 
     }
+
 }
