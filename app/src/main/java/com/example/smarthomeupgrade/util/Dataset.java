@@ -86,7 +86,7 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
 
     private void updateHtml(){
         String home = SHUFileUtilities.readAssetFile(rootContext,"home.html");
-        String[] repArr_home = new String[2];
+        String[] repArr_home = new String[1];
         repArr_home[0] = contents.getAllStates();
         String stats = SHUFileUtilities.readAssetFile(rootContext,"stats.html");
         String newHome = SHUFileUtilities.ersetze(home,repArr_home);
@@ -96,6 +96,7 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
         repArr_stats[0] = contents.getAllDezibels();
         repArr_stats[1] = contents.getAllTimes();
         String newStats = SHUFileUtilities.ersetze(stats,repArr_stats);
+
         SHUFileUtilities.writeToFile(newHome,rootContext,"stats.html");
     }
 

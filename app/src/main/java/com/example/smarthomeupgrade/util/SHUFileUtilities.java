@@ -1,6 +1,7 @@
 package com.example.smarthomeupgrade.util;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import com.example.smarthomeupgrade.ui.login.LoginFragment;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.view.ViewCompat;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,7 +41,6 @@ public class SHUFileUtilities {
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
-
 
 
     public static String readAssetFile(Context context, String filename) {
@@ -70,75 +71,95 @@ public class SHUFileUtilities {
 
         if (filename.equals("home.html")) {
 
-        }else if (filename.equals("stats.html")){
+        } else if (filename.equals("stats.html")) {
             int i;
 
         }
-        }
+    }
 
-    public static String ersetze( String data, String[] repArr) {
+    public static String ersetze(String data, String[] repArr) {
         String ready = "";
         try {
-            for (int i = 0;i < repArr.length ;i++ ) {
-                ready += data.substring(0,data.indexOf("[")) + repArr[i];
-                data = data.substring(data.indexOf("]")+1);
+            for (int i = 0; i < repArr.length; i++) {
+                ready += data.substring(0, data.indexOf("[")) + repArr[i];
+                data = data.substring(data.indexOf("]") + 1);
             }
             ready += data;
-        } catch(Exception e) {
+        } catch (Exception e) {
             ready += data;
         }
         return (ready);
     }
 
 
-
-    public static void copyFileOrDir(Context context,String path, String destinationDir) {
+    public static void copyAssets(Context context) {
+        Log.d("copyAssets()", "entering copyAssets( " + context.toString() + " )");
         AssetManager assetManager = context.getAssets();
-        String assets[] = null;
-        try {
-            assets = assetManager.list(path);
-            if (assets.length == 0) {
-                copyFile(context, path,destinationDir);
-            } else {
-                String fullPath = destinationDir + "/" + path;
-                File dir = new File(fullPath);
-                if (!dir.exists())
-                    dir.mkdir();
-                for (int i = 0; i < assets.length; ++i) {
-                    copyFileOrDir(context,path + "/" + assets[i], destinationDir + path + "/" + assets[i]);
+        //listAssetFiles("", context);
+        String[] files = null;
+        String[] directories = {"assets/bootstrap/js", "assets/bootstrap/css", "assets/fonts", "assets/img/scenery", "assets/img/socks", "assets/img/tutorial", "assets/js"};
+        String debug = "directories:\n";
+        for (String path : directories) {
+            debug = debug + path + "\n";
+        }
+        Log.d("copyAssets()", debug);
+        for (int i = 0; i < directories.length; i++) {
+
+            try {
+                Log.d("copyAssets()", "now getting list of files in " + directories[i]);
+                files = assetManager.list(directories[i]);
+                Log.d("copyAssets()", "successfully got the list");
+                debug = "list contains:\n";
+                for (String path : files) {
+                    debug = debug + path + "\n";
+                }
+                Log.d("copyAssets()", debug + "list end\n");
+            } catch (IOException e) {
+                Log.e("copyAssets()", "Failed to get asset file list.", e);
+            }
+
+            String outDir = context.getFilesDir().getAbsolutePath() + "/" + directories[i];
+            File test = new File(outDir);
+            test.mkdirs();
+
+
+            for (String filename : files) {
+                InputStream in = null;
+                OutputStream out = null;
+                try {
+                    Log.d("copyAssets()", "copying " + filename + " from " + directories[i] + " to internal storage");
+                    File outFile = new File(outDir, filename);
+                    if(outFile.exists()){
+                        Log.d("copyAssets()", "skipping " + filename );
+                        continue;
+                    }
+
+                    in = context.getAssets().open(directories[i] + "/" + filename);
+                    out = new FileOutputStream(outFile);
+
+
+                    copyFile(in, out);
+                    in.close();
+                    in = null;
+                    out.flush();
+                    out.close();
+                    out = null;
+                } catch (IOException e) {
+                    Log.e("copyAssets()", "Failed to copy asset file: " + filename, e);
                 }
             }
-        } catch (IOException ex) {
-            Log.e("tag", "I/O Exception", ex);
         }
     }
 
-    private static void copyFile(Context context, String filename, String destinationDir) {
-        AssetManager assetManager = context.getAssets();
-        String newFileName = destinationDir + "/" + filename;
 
-        InputStream in = null;
-        OutputStream out = null;
-        try {
-            in = assetManager.open(filename);
-            out = new FileOutputStream(newFileName);
 
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
-            }
-            in.close();
-            in = null;
-            out.flush();
-            out.close();
-            out = null;
-        } catch (Exception e) {
-            Log.e("tag", e.getMessage());
+    private static void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while ((read = in.read(buffer)) != -1) {
+            out.write(buffer, 0, read);
         }
-        new File(newFileName).setExecutable(true, false);
     }
-
 
 
 
