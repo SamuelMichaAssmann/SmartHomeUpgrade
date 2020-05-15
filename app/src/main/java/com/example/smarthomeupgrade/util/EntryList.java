@@ -56,7 +56,7 @@ public class EntryList extends ArrayList<ListElement> {
         } else {
             out = out + "False";
         }
-        for (int i = 2; i < this.size() && i < 14; i++){
+        for (int i = 2; i < this.size() && i < 4; i++){
             if(this.get(this.size() - i).getState())
                 out = out + ", True";
             else

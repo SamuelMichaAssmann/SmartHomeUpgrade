@@ -28,6 +28,9 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class SHUFileUtilities {
+
+    public static String SAVE_FILE = "savedDatasets.txt";
+
     public static void writeToFile(String data, Context context, String filename) {
         //replaceData(data,filename);
 
@@ -42,6 +45,41 @@ public class SHUFileUtilities {
         }
     }
 
+
+    public static BufferedReader connectToFile(Context context, String filename) {
+        try {
+            InputStream inputStream = context.openFileInput(filename);
+
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                return new BufferedReader(inputStreamReader);
+
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        }
+        return null;
+    }
+
+    public static String readFile(Context context, String filename) {
+        try {
+            InputStream inputStream = context.openFileInput(filename);
+            String output = "";
+            if (inputStream != null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader in = new BufferedReader(inputStreamReader);
+                try{
+                    String inputLine = in.readLine() ;
+                    while ((inputLine = in.readLine()) != null) {
+                        output = output + "\n" + in.readLine();
+                    }
+                }catch(Exception e){}
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        }
+        return null;
+    }
 
     public static String readAssetFile(Context context, String filename) {
         String out = "";

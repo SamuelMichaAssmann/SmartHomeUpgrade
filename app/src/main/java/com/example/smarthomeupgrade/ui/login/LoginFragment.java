@@ -48,7 +48,6 @@ public class LoginFragment extends Fragment {
         websettings.setJavaScriptEnabled(true);
 
 
-
         //list = root.findViewById(R.id.listview);
         //layoutManager = new LinearLayoutManager(root.getContext());
         //list.setLayoutManager(layoutManager);

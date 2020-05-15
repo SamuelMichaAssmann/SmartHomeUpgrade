@@ -1,6 +1,7 @@
 package com.example.smarthomeupgrade;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +11,10 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.smarthomeupgrade.util.Dataset;
 import com.example.smarthomeupgrade.util.SHUFileUtilities;
+import com.example.smarthomeupgrade.util.SaveEntry;
+import com.example.smarthomeupgrade.util.SaveHandler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        updateData(getApplicationContext());
 
         SHUFileUtilities.copyAssets(this.getApplicationContext());
 
@@ -62,6 +67,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void updateData(Context context){
+        Dataset dataset;
+
+        SaveHandler saveHandler = new SaveHandler(context);
+        SaveEntry mostRecent = saveHandler.getMostRecent();
+
+        if(mostRecent != null) {
+            dataset = new Dataset(context, mostRecent.getSource());
+        }
     }
 
     @Override
