@@ -66,6 +66,9 @@ public class LoginFragment extends Fragment {
                     Log.d("test","debugging Dataset");
                     Dataset webLoadingTask = new Dataset( root, root.getContext(),filepath.getText().toString() + ".txt");
                     webLoadingTask.execute();
+                } else if(github.getText().toString().equals("v")) {
+                    Dataset webLoadingTask = new Dataset( root, "https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001", root.getContext(), filepath.getText().toString() + ".txt");
+                    webLoadingTask.execute();
                 } else {
                     Dataset webLoadingTask = new Dataset( root, github.getText().toString(), root.getContext(), filepath.getText().toString() + ".txt");
                     webLoadingTask.execute();

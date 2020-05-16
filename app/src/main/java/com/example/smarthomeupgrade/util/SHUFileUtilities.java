@@ -33,9 +33,9 @@ public class SHUFileUtilities {
 
     public static void writeToFile(String data, Context context, String filename) {
         //replaceData(data,filename);
-
         Log.d("Read/WriteUtil", "Starting to write to file: " + filename);
-        Log.d("Read/WriteUtil", "data:\n" + data);
+        if(filename.equals("savedDatasets.txt"))
+            Log.d("Read/WriteUtil", "data:\n" + data);
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
@@ -62,23 +62,25 @@ public class SHUFileUtilities {
     }
 
     public static String readFile(Context context, String filename) {
+        String output = null;
         try {
             InputStream inputStream = context.openFileInput(filename);
-            String output = "";
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader in = new BufferedReader(inputStreamReader);
                 try{
                     String inputLine = in.readLine() ;
+                    output = inputLine;
                     while ((inputLine = in.readLine()) != null) {
-                        output = output + "\n" + in.readLine();
+                        output = output + "\n" + inputLine;
                     }
                 }catch(Exception e){}
             }
         } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
         }
-        return null;
+        Log.d("test","read file: " + output);
+        return output;
     }
 
     public static String readAssetFile(Context context, String filename) {
@@ -135,7 +137,7 @@ public class SHUFileUtilities {
         AssetManager assetManager = context.getAssets();
         //listAssetFiles("", context);
         String[] files = null;
-        String[] directories = {"assets/bootstrap/js", "assets/bootstrap/css", "assets/fonts", "assets/img/scenery", "assets/img/socks", "assets/img/tutorial", "assets/js"};
+        String[] directories = {"assets/bootstrap/js", "assets/bootstrap/css", "assets/fonts", "assets/img/scenery", "assets/img/socks", "assets/img/tutorial", "assets/js", ""};
         String debug = "directories:\n";
         for (String path : directories) {
             debug = debug + path + "\n";

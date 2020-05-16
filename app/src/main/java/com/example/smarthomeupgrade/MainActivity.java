@@ -76,9 +76,12 @@ public class MainActivity extends AppCompatActivity {
         SaveEntry mostRecent = saveHandler.getMostRecent();
 
         if(mostRecent != null) {
-            dataset = new Dataset(context, mostRecent.getSource());
+            new Dataset(context, mostRecent.getFilename()).execute();
+            new Dataset(mostRecent.getSource(),context, mostRecent.getFilename()).execute();
         }
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

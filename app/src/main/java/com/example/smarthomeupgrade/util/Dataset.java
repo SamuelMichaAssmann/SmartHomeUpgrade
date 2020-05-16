@@ -47,6 +47,15 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
         no_View = false;
     }
 
+    public Dataset( String URL, Context context, String filename) {
+        super();
+        if (filename.length() != 0)
+            this.filename = filename;
+        this.URL = URL;
+        this.rootContext = context;
+    }
+
+
     public Dataset(Context context, String filename) {
         super();
         this.is_offline = true;
@@ -70,7 +79,7 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
 
         Log.d("WebLoadingTask", "Starting to write to file: " + filename);
         if (data.length() > 10)
-            Log.d("WebLoadingTask", "data: " + data.substring(0, 10) + "...");
+            //Log.d("WebLoadingTask", "data: " + data.substring(0, 10) + "...");
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
@@ -84,7 +93,7 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
     private void updateHtml() {
         Log.d("updateHtml()", "Updating: home.html");
         String home = SHUFileUtilities.readAssetFile(rootContext, "home.html");
-        Log.d("updateHtml()", "read hom:\n" + home);
+        //Log.d("updateHtml()", "read hom:\n" + home);
         String[] repArr_home = new String[1];
         repArr_home[0] = contents.getAllStates();
         String stats = SHUFileUtilities.readAssetFile(rootContext, "stats.html");
@@ -157,7 +166,7 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
 
     private void updateSave(){
         SaveHandler handler = new SaveHandler(rootContext);
-        handler.createSave(filename);
+        handler.createSave(filename, URL);
     }
 
     private boolean isValidSource(String firstLine) {

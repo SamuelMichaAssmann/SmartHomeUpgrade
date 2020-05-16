@@ -23,11 +23,13 @@ public class SaveHandler extends ArrayList<SaveEntry> {
         } catch (Exception e) {
 
         }
+        return;
     }
 
-    public void createSave(String source){
+    public void createSave(String filename, String URL){
         SaveEntry newSave = new SaveEntry();
-        newSave.setSource(source);
+        newSave.setSource(URL);
+        newSave.setFilename(filename);
         newSave.writeSave(context);
         this.add(newSave);
     }

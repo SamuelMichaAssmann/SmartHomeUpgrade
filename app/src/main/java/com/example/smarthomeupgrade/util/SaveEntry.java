@@ -1,18 +1,28 @@
 package com.example.smarthomeupgrade.util;
 
 import android.content.Context;
+import android.util.Log;
 
 public class SaveEntry {
     private String source = "";
+    private String filename = "";
     private Long time = 00l;
 
 
-    public SaveEntry(String in){
+    public SaveEntry(String in) {
         interpret(in);
     }
 
-    public SaveEntry(){
+    public SaveEntry() {
 
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getFilename() {
+        return filename;
     }
 
     public void setSource(String source) {
@@ -31,32 +41,42 @@ public class SaveEntry {
         return time;
     }
 
-    public void writeSave(Context context){
+    public void writeSave(Context context) {
         time = System.currentTimeMillis();
-        String file = SHUFileUtilities.readFile(context,SHUFileUtilities.SAVE_FILE);
-        if(file == null)
-            SHUFileUtilities.writeToFile(source + "#" + time.toString() + "#",context,SHUFileUtilities.SAVE_FILE);
-        else
-        SHUFileUtilities.writeToFile(file + "\n" + source + "#" + time.toString() + "#",context,SHUFileUtilities.SAVE_FILE);
+        String data = source + "#" + time.toString() + "#" + filename + "#" + "\n";
+        String file = SHUFileUtilities.readFile(context, SHUFileUtilities.SAVE_FILE);
+        if (file == null) {
+            Log.d("test", "writing: \n" + data);
+            SHUFileUtilities.writeToFile( data, context, SHUFileUtilities.SAVE_FILE);
+        } else {
+            Log.d("test","writing: \n" + file + "\n" + data);
+            SHUFileUtilities.writeToFile(file + "\n" +  data, context , SHUFileUtilities.SAVE_FILE);
+        }
     }
 
-    private void interpret(String in){
+    private void interpret(String in) {
         int temp = 0;
         String time = "";
-        boolean state;
-        for(int i = 0; i < in.length(); i++){
-            if(in.charAt(i) == '#'){
+        for (int i = 0; i < in.length(); i++) {
+            if (in.charAt(i) == '#') {
                 temp = i;
                 break;
             }
             source = source + in.charAt(i);
         }
-        for(int i = temp + 1; i < in.length(); i++){
-            if(in.charAt(i) == '#'){
+        for (int i = temp + 1; i < in.length(); i++) {
+            if (in.charAt(i) == '#') {
                 temp = i;
                 break;
             }
             time = time + in.charAt(i);
+        }
+        for (int i = temp + 1; i < in.length(); i++) {
+            if (in.charAt(i) == '#') {
+                temp = i;
+                break;
+            }
+            filename = filename + in.charAt(i);
         }
         this.time = Long.decode(time);
 
