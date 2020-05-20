@@ -34,6 +34,7 @@ public class StatsFragment extends Fragment {
 
         WebView webView = (WebView) root.findViewById(R.id.webview_home);
         webView.setWebViewClient(new WebViewClient());
+        //Update data
         webView.loadUrl(Uri.parse("file://" + root.getContext().getFilesDir() + "/stats.html").toString());
         WebSettings websettings = webView.getSettings();
         webView.setBackgroundColor(Color.TRANSPARENT);
