@@ -173,8 +173,10 @@ public class SHUFileUtilities {
                         Log.d("copyAssets()", "skipping " + filename );
                         continue;
                     }
-
-                    in = context.getAssets().open(directories[i] + "/" + filename);
+                    if(directories[i].contentEquals(""))
+                        in = context.getAssets().open(filename);
+                    else
+                        in = context.getAssets().open(directories[i] + "/" + filename);
                     out = new FileOutputStream(outFile);
 
 

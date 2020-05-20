@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             new Dataset(context, mostRecent.getFilename()).execute();
             new Dataset(mostRecent.getSource(),context, mostRecent.getFilename()).execute();
         }
+        saveHandler.updateHtml();
 
     }
 

@@ -13,7 +13,7 @@ public class EntryList extends ArrayList<ListElement> {
                 "\ngetAllDates()    -> " + getAllDates() +
                 "\ngetAllTimes()    -> " + getAllTimes() +
                 "\ngetAllDezibels() -> " + getAllDezibels() +
-                "\ngetAllStates()   -> " + getAllStates()
+                "\ngetAllStates()   -> " + getCurrState()
         );
     }
 
@@ -47,22 +47,12 @@ public class EntryList extends ArrayList<ListElement> {
         return out + "]";
     }
 
-    public String getAllStates(){
+    public String getCurrState(){
         if(this.isEmpty())
-            return "[ ]";
-        String out = "[ ";
-        if(this.get(this.size() - 1).getState()){
-            out = out + "True";
-        } else {
-            out = out + "False";
-        }
-        for (int i = 2; i < this.size() && i < 4; i++){
-            if(this.get(this.size() - i).getState())
-                out = out + ", True";
-            else
-                out = out + ", False";
-        }
-        return out + "]";
+            return null;
+        if(this.get(this.size()-1).getState())
+            return "true";
+        return "false";
     }
 
     @NonNull

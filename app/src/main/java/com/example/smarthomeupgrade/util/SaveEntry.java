@@ -7,6 +7,7 @@ public class SaveEntry {
     private String source = "";
     private String filename = "";
     private Long time = 00l;
+    private Dataset corrData;
 
 
     public SaveEntry(String in) {
@@ -23,6 +24,10 @@ public class SaveEntry {
 
     public String getFilename() {
         return filename;
+    }
+
+    public Dataset getCorrData() {
+        return corrData;
     }
 
     public void setSource(String source) {
@@ -52,6 +57,11 @@ public class SaveEntry {
             Log.d("test","writing: \n" + file + "\n" + data);
             SHUFileUtilities.writeToFile(file + "\n" +  data, context , SHUFileUtilities.SAVE_FILE);
         }
+    }
+
+    public void loadData(Context context){
+        corrData = new Dataset(context, filename);
+        corrData.execute();
     }
 
     private void interpret(String in) {

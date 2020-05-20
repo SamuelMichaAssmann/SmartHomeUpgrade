@@ -6,14 +6,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 
-import com.example.smarthomeupgrade.ui.login.LoginFragment;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
@@ -27,6 +24,7 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
     private View root;
     private boolean finished = false;
     private boolean no_View = true;
+    private SaveHandler notifyAfterFinish;
 
     public Dataset(View root, String URL, Context context) {
         super();
@@ -79,7 +77,7 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
 
         Log.d("WebLoadingTask", "Starting to write to file: " + filename);
         if (data.length() > 10)
-            //Log.d("WebLoadingTask", "data: " + data.substring(0, 10) + "...");
+            Log.d("WebLoadingTask", "data: " + data.substring(0, 10) + "...");
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
@@ -87,26 +85,6 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
-    }
-
-
-    private void updateHtml() {
-        Log.d("updateHtml()", "Updating: home.html");
-        String home = SHUFileUtilities.readAssetFile(rootContext, "home.html");
-        //Log.d("updateHtml()", "read hom:\n" + home);
-        String[] repArr_home = new String[1];
-        repArr_home[0] = contents.getAllStates();
-        String stats = SHUFileUtilities.readAssetFile(rootContext, "stats.html");
-        String newHome = SHUFileUtilities.ersetze(home, repArr_home);
-        SHUFileUtilities.writeToFile(newHome, rootContext, "home.html");
-
-        Log.d("updateHtml()", "Updating: stats.html");
-        String[] repArr_stats = new String[2];
-        repArr_stats[0] = contents.getAllDezibels();
-        repArr_stats[1] = contents.getAllTimes();
-        String newStats = SHUFileUtilities.ersetze(stats, repArr_stats);
-
-        SHUFileUtilities.writeToFile(newHome, rootContext, "stats.html");
     }
 
 
@@ -153,13 +131,13 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
         }
 
         if (!is_offline) {
+            Log.d("WebLoadingTask","saving progress...");
             writeToFile(contents.getRawText(), rootContext);
             updateSave();
         }
         if (!no_View)
             Snackbar.make(root, "imported " + contents.size() + " entries, corresponding file: " + filename, BaseTransientBottomBar.LENGTH_LONG).show();
         //contents.test();
-        updateHtml();
         finished = true;
         return null;
     }
@@ -167,6 +145,7 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
     private void updateSave(){
         SaveHandler handler = new SaveHandler(rootContext);
         handler.createSave(filename, URL);
+        handler.updateHtml();
     }
 
     private boolean isValidSource(String firstLine) {
@@ -180,9 +159,14 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
         }
     }
 
+    public void setNotifyAfterFinish(SaveHandler notifyAfterFinish) {
+        this.notifyAfterFinish = notifyAfterFinish;
+    }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        if(notifyAfterFinish != null)
+            notifyAfterFinish.notifyAll();
     }
 }
