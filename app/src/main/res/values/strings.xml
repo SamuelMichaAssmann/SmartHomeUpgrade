@@ -24,9 +24,10 @@
     <string name="option">Options</string>
     <string name="setup">Setup</string>
     <string name="uber">Über</string>
-    <string name="version">Version 1.0.0</string>
+    <string name="version">Version 11.13.59</string>
     <string name="lizenz">Lizenz</string>
     <string name="nutzungsbedingungen">Nutzungsbedingungen</string>
     <string name="datenschutzrichtlinie">Datenschutzrichtlinie</string>
+    <string name="help">Help</string>
 
 </resources>
