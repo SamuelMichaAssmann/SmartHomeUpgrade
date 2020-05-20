@@ -164,6 +164,8 @@ public class SHUFileUtilities {
 
 
             for (String filename : files) {
+                if(filename.contentEquals("home.html") || filename.contentEquals("stats.html"))
+                    continue;
                 InputStream in = null;
                 OutputStream out = null;
                 try {

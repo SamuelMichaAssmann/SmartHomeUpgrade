@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     
 
     private AppBarConfiguration mAppBarConfiguration;
+    public static SaveHandler saveHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateData(Context context){
-        Dataset dataset;
-
-        SaveHandler saveHandler = new SaveHandler(context);
-        SaveEntry mostRecent = saveHandler.getMostRecent();
-
-        if(mostRecent != null) {
-            new Dataset(context, mostRecent.getFilename()).execute();
-            new Dataset(mostRecent.getSource(),context, mostRecent.getFilename()).execute();
-        }
+        saveHandler = new SaveHandler(context);
         saveHandler.updateHtml();
 
     }

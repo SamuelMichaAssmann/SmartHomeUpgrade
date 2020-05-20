@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.smarthomeupgrade.MainActivity;
 import com.example.smarthomeupgrade.R;
 import com.example.smarthomeupgrade.util.SHUFileUtilities;
 
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
 
         WebView webView = (WebView) root.findViewById(R.id.webview_home);
         webView.setWebViewClient(new WebViewClient());
+        MainActivity.saveHandler.updateHtml();
         //DATAUpdate!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         webView.loadUrl(Uri.parse("file://" + root.getContext().getFilesDir() + "/home.html").toString());
         WebSettings websettings = webView.getSettings();

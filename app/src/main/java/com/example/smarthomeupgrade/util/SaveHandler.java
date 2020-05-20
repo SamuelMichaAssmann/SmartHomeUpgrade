@@ -77,7 +77,16 @@ public class SaveHandler extends ArrayList<SaveEntry> {
         newSave.setFilename(filename);
         newSave.loadData(context);
         newSave.writeSave(context);
+        removeOlderVersions(newSave);
         this.add(newSave);
+    }
+
+    private void removeOlderVersions(SaveEntry newEntry){
+        for(SaveEntry in: this){
+            if(newEntry.getFilename().contentEquals(in.getFilename()) && newEntry.getSource().contentEquals(in.getSource()))
+                if(newEntry.getTime() > in.getTime())
+                    this.remove(in);
+        }
     }
 
     private boolean isNewerVersion(SaveEntry newEntry){

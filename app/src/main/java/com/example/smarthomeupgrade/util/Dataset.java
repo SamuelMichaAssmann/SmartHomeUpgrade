@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 
+import com.example.smarthomeupgrade.MainActivity;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -143,9 +144,8 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
     }
 
     private void updateSave(){
-        SaveHandler handler = new SaveHandler(rootContext);
-        handler.createSave(filename, URL);
-        handler.updateHtml();
+        MainActivity.saveHandler.createSave(filename,URL);
+        MainActivity.saveHandler.updateHtml();
     }
 
     private boolean isValidSource(String firstLine) {
