@@ -25,7 +25,6 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
     private View root;
     private boolean finished = false;
     private boolean no_View = true;
-    private SaveHandler notifyAfterFinish;
 
     public Dataset(View root, String URL, Context context) {
         super();
@@ -134,7 +133,6 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
         if (!is_offline) {
             Log.d("WebLoadingTask","saving progress...");
             writeToFile(contents.getRawText(), rootContext);
-            updateSave();
         }
         if (!no_View)
             Snackbar.make(root, "imported " + contents.size() + " entries, corresponding file: " + filename, BaseTransientBottomBar.LENGTH_LONG).show();
@@ -143,9 +141,9 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
-    private void updateSave(){
-        MainActivity.saveHandler.createSave(filename,URL);
-        MainActivity.saveHandler.updateHtml();
+
+    public boolean isFinished() {
+        return finished;
     }
 
     private boolean isValidSource(String firstLine) {
@@ -159,14 +157,9 @@ public class Dataset extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    public void setNotifyAfterFinish(SaveHandler notifyAfterFinish) {
-        this.notifyAfterFinish = notifyAfterFinish;
-    }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        if(notifyAfterFinish != null)
-            notifyAfterFinish.notifyAll();
     }
 }

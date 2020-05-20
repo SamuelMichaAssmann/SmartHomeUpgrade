@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateData(Context context){
-        saveHandler = new SaveHandler(context);
+        if(saveHandler == null)
+            saveHandler = new SaveHandler(context);
+        saveHandler.updateDatasets();
         saveHandler.updateHtml();
 
     }

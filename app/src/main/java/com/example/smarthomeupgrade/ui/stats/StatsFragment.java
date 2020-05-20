@@ -27,10 +27,6 @@ public class StatsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_html, container, false);
 
 
-        String test = SHUFileUtilities.readAssetFile(root.getContext(),"stats.html");
-
-        SHUFileUtilities.writeToFile(test,root.getContext(),"stats.html");
-
 
         WebView webView = (WebView) root.findViewById(R.id.webview_home);
         webView.setWebViewClient(new WebViewClient());

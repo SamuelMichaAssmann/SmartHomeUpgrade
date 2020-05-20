@@ -96,7 +96,8 @@ public class SHUFileUtilities {
                     out = out + "\n";
                     out = out + receiveString;
                 }
-
+                bufferedReader.close();
+                inputStreamReader.close();
                 inputStream.close();
 
             }

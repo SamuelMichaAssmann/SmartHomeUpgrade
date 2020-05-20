@@ -1,6 +1,7 @@
 package com.example.smarthomeupgrade.util;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.util.Log;
 
@@ -34,14 +35,19 @@ public class SaveHandler extends ArrayList<SaveEntry> {
     }
 
     public void updateHtml() {
-        if(isEmpty())
+        Log.d("updateHtml()", "Entering updateHtml()");
+        if(isEmpty()){
+            Log.d("updateHtml()", "Saves are empty, exiting method after copying home.html and stats.html");
+            SHUFileUtilities.writeToFile(SHUFileUtilities.readAssetFile(context, "home.html"), context, "home.html");
+            SHUFileUtilities.writeToFile(SHUFileUtilities.readAssetFile(context, "stats.html"), context, "stats.html");
             return;
+        }
 
 
         Log.d("updateHtml()", "Updating: home.html");
         String states = "[ ";
         for(SaveEntry machine : this){
-            while(machine.getCorrData() == null){
+            while(machine.getCorrData() == null || !machine.getCorrData().isFinished()){
                 Log.d("updateHtml()","waiting for Dataset: " + machine.getFilename());
             }
             String in = machine.getCorrData().contents.getCurrState();
@@ -51,6 +57,7 @@ public class SaveHandler extends ArrayList<SaveEntry> {
             }
         }
         states = states.substring(0,states.length()-1) + " ]";
+        Log.d("updateHtml()", "updating home.html with states: " + states);
 
         String home = SHUFileUtilities.readAssetFile(context, "home.html");
         //Log.d("updateHtml()", "read hom:\n" + home);
@@ -62,11 +69,14 @@ public class SaveHandler extends ArrayList<SaveEntry> {
         Log.d("updateHtml()", "Updating: stats.html");
         String stats = SHUFileUtilities.readAssetFile(context, "stats.html");
         String[] repArr_stats = new String[2];
-        repArr_stats[0] = getMostRecent().getCorrData().contents.getAllDezibels();
-        repArr_stats[1] = getMostRecent().getCorrData().contents.getAllTimes();
+        SaveEntry mostRecent = getMostRecent();
+        while(mostRecent.getCorrData() == null || !mostRecent.getCorrData().isFinished()){}
+        repArr_stats[0] = mostRecent.getCorrData().contents.getAllDezibels();
+        repArr_stats[1] = mostRecent.getCorrData().contents.getAllTimes();
+        Log.d("updateHtml()", "Updating stats.html with Arrays: \n" + repArr_stats[0] + "\n" + repArr_stats[1]);
         String newStats = SHUFileUtilities.ersetze(stats, repArr_stats);
 
-        SHUFileUtilities.writeToFile(newHome, context, "stats.html");
+        SHUFileUtilities.writeToFile(newStats, context, "stats.html");
     }
 
 
@@ -105,6 +115,15 @@ public class SaveHandler extends ArrayList<SaveEntry> {
                     return true;
         }
         return false;
+    }
+
+    public void updateDatasets(){
+        for(SaveEntry machine : this){
+            machine.setCorrData(new Dataset(
+                    machine.getSource(),context,machine.getFilename()
+            ));
+            machine.getCorrData().execute();
+        }
     }
 
     public SaveEntry getMostRecent(){

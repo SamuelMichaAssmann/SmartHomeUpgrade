@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smarthomeupgrade.MainActivity;
 import com.example.smarthomeupgrade.R;
 import com.example.smarthomeupgrade.util.Dataset;
 import com.example.smarthomeupgrade.util.ListElement;
@@ -69,9 +70,11 @@ public class LoginFragment extends Fragment {
                 } else if(github.getText().toString().equals("v")) {
                     Dataset webLoadingTask = new Dataset( root, "https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001", root.getContext(), filepath.getText().toString() + ".txt");
                     webLoadingTask.execute();
+                    MainActivity.saveHandler.createSave(filepath.getText().toString() + ".txt","https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001");
                 } else {
                     Dataset webLoadingTask = new Dataset( root, github.getText().toString(), root.getContext(), filepath.getText().toString() + ".txt");
                     webLoadingTask.execute();
+                    MainActivity.saveHandler.createSave(filepath.getText().toString() + ".txt",github.getText().toString());
                 }
 
             }

@@ -18,24 +18,13 @@ public class SaveEntry {
 
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-
+    //GETTER
     public String getFilename() {
         return filename;
     }
 
     public Dataset getCorrData() {
         return corrData;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public void setTime(Long time) {
-        this.time = time;
     }
 
     public String getSource() {
@@ -46,6 +35,24 @@ public class SaveEntry {
         return time;
     }
 
+    //SETTER
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public void setCorrData(Dataset corrData) {
+        this.corrData = corrData;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
+
+    //METHODS
     public void writeSave(Context context) {
         time = System.currentTimeMillis();
         String data = source + "#" + time.toString() + "#" + filename + "#" + "\n";
