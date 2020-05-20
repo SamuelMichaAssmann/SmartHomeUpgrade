@@ -71,6 +71,12 @@ public class SaveHandler extends ArrayList<SaveEntry> {
         String[] repArr_stats = new String[3];
         SaveEntry mostRecent = getMostRecent();
         while(mostRecent.getCorrData() == null || !mostRecent.getCorrData().isFinished()){}
+
+        for(SaveEntry n : this){
+            while(n.getCorrData() == null || !n.getCorrData().isFinished()){}
+            //Code here n.getCorrData()
+        }
+
         repArr_stats[0] = mostRecent.getCorrData().contents.getAllDezibels();
         repArr_stats[1] = mostRecent.getCorrData().contents.getAllTimes();
         this.get(this.size()-1).getCorrData().contents.getAllDates();
