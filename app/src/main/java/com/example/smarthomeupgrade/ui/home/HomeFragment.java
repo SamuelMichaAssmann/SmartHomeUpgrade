@@ -36,8 +36,10 @@ public class HomeFragment extends Fragment {
 
         WebView webView = (WebView) root.findViewById(R.id.webview_home);
         webView.setWebViewClient(new WebViewClient());
-        MainActivity.saveHandler.updateHtml();
         //DATAUpdate!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        MainActivity.saveHandler.updateDatasets();
+        MainActivity.saveHandler.updateHtml();
+        //Update finished
         webView.loadUrl(Uri.parse("file://" + root.getContext().getFilesDir() + "/home.html").toString());
         WebSettings websettings = webView.getSettings();
         webView.setBackgroundColor(Color.TRANSPARENT);

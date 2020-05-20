@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.smarthomeupgrade.MainActivity;
 import com.example.smarthomeupgrade.R;
 import com.example.smarthomeupgrade.util.SHUFileUtilities;
 
@@ -31,6 +32,9 @@ public class StatsFragment extends Fragment {
         WebView webView = (WebView) root.findViewById(R.id.webview_home);
         webView.setWebViewClient(new WebViewClient());
         //Update data
+        MainActivity.saveHandler.updateDatasets();
+        MainActivity.saveHandler.updateHtml();
+        //Update finished
         webView.loadUrl(Uri.parse("file://" + root.getContext().getFilesDir() + "/stats.html").toString());
         WebSettings websettings = webView.getSettings();
         webView.setBackgroundColor(Color.TRANSPARENT);
