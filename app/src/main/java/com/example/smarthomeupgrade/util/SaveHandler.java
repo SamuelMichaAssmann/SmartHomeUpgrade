@@ -68,12 +68,13 @@ public class SaveHandler extends ArrayList<SaveEntry> {
 
         Log.d("updateHtml()", "Updating: stats.html");
         String stats = SHUFileUtilities.readAssetFile(context, "stats.html");
-        String[] repArr_stats = new String[2];
+        String[] repArr_stats = new String[3];
         SaveEntry mostRecent = getMostRecent();
         while(mostRecent.getCorrData() == null || !mostRecent.getCorrData().isFinished()){}
         repArr_stats[0] = mostRecent.getCorrData().contents.getAllDezibels();
         repArr_stats[1] = mostRecent.getCorrData().contents.getAllTimes();
-        Log.d("updateHtml()", "Updating stats.html with Arrays: \n" + repArr_stats[0] + "\n" + repArr_stats[1]);
+        repArr_stats[2] = "";
+        Log.d("updateHtml()", "Updating stats.html with Arrays: \n" + repArr_stats[0] + "\n" + repArr_stats[1] + "\n" + repArr_stats[2]);
         String newStats = SHUFileUtilities.ersetze(stats, repArr_stats);
 
         SHUFileUtilities.writeToFile(newStats, context, "stats.html");
