@@ -1,6 +1,7 @@
 package com.example.smarthomeupgrade.ui.login;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smarthomeupgrade.MainActivity;
@@ -25,6 +31,7 @@ import com.example.smarthomeupgrade.util.ManageAssetFolders;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LoginFragment extends Fragment {
     private View root;
@@ -56,6 +63,7 @@ public class LoginFragment extends Fragment {
 
         Button commit = root.findViewById(R.id.button_add);
         commit.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 //https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001 test link
@@ -76,6 +84,8 @@ public class LoginFragment extends Fragment {
                     webLoadingTask.execute();
                     MainActivity.saveHandler.createSave(filepath.getText().toString() + ".txt",github.getText().toString());
                 }
+                //Clear Textfield Text
+                //goto home
 
             }
         });
