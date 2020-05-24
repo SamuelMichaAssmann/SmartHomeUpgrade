@@ -74,21 +74,46 @@ public class SaveHandler extends ArrayList<SaveEntry> {
 
         for(SaveEntry n : this){
             while(n.getCorrData() == null || !n.getCorrData().isFinished()){}
-            String s = this.get(this.size()-1).getCorrData().contents.getAllDates();
-            String t = this.get(this.size()-1).getCorrData().contents.getCurrState();
-            Log.d("Statsabfrage", s + "\n" + t);
+            ArrayList d = this.get(this.size()-1).getCorrData().contents.getEveryDates();
+            ArrayList s = this.get(this.size()-1).getCorrData().contents.getEveryState();
+            repArr_stats[2] = workwithdata(d,s);
+            Log.d("Statsabfrage", s + "\n" + d);
         }
+
 
         repArr_stats[0] = mostRecent.getCorrData().contents.getAllDezibels();
         repArr_stats[1] = mostRecent.getCorrData().contents.getAllTimes();
 
-        repArr_stats[2] = "[]";
+
         Log.d("updateHtml()", "Updating stats.html with Arrays: \n" + repArr_stats[0] + "\n" + repArr_stats[1] + "\n" + repArr_stats[2]);
         String newStats = SHUFileUtilities.ersetze(stats, repArr_stats);
 
         SHUFileUtilities.writeToFile(newStats, context, "stats.html");
     }
 
+    private String workwithdata(ArrayList d, ArrayList s) {
+        int[][] arr = new int[d.size()][2];
+        arr[0][0]++;
+        if (s.get(0).equals(false)) arr[0][1]++;
+        int counter = 0;
+        for (int i = 1; i < d.size(); i++) {
+            if (d.get(i - 1).equals(d.get(i))){
+                arr[counter][0]++;
+                if (s.get(i).equals(false)) arr[counter][1]++;
+            }else counter++;
+        }
+        for (int[] i : arr) {
+            Log.d("Data", "All: " + i[0] + " True: " + i[1]);
+        }
+        String t = "[" + (100 / arr[0][0]) * arr[0][1];
+        for (int j = 1; j < arr.length; j++){
+            if (arr[j][0] != 0){
+                t += ", " + 100 / arr[j][0] * arr[j][1];
+            }else   t += ", 0";
+        }
+
+        return t + "]";
+    }
 
 
     public void createSave(String filename, String URL){

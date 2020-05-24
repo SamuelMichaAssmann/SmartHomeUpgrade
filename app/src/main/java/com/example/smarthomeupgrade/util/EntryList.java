@@ -27,6 +27,28 @@ public class EntryList extends ArrayList<ListElement> {
         return out + "]";
     }
 
+
+    public ArrayList getEveryDates(){
+        ArrayList<String> data = new ArrayList<String>();
+        if(this.isEmpty())
+            data = null;
+        for (int i = 1; i < this.size() && i < 14; i++){
+            data.add(this.get(this.size() - i).getDate());
+        }
+        return data;
+    }
+
+
+    public ArrayList getEveryState(){
+        ArrayList<Boolean> data = new ArrayList<>();
+        if(this.isEmpty())
+            data = null;
+        for (int i = 1; i < this.size() && i < 14; i++){
+            data.add(this.get(this.size() - i).getState());
+        }
+        return data;
+    }
+
     public String getAllTimes(){
         if(this.isEmpty())
             return "[ ]";
