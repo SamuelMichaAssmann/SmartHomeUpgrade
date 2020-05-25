@@ -15,23 +15,20 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smarthomeupgrade.MainActivity;
 import com.example.smarthomeupgrade.R;
 import com.example.smarthomeupgrade.util.Dataset;
-import com.example.smarthomeupgrade.util.ListElement;
+
 import com.example.smarthomeupgrade.util.ManageAssetFolders;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-import java.util.Objects;
+
 
 public class LoginFragment extends Fragment {
     private View root;

@@ -1,19 +1,17 @@
 package com.example.smarthomeupgrade;
 
-import android.annotation.SuppressLint;
+
 import android.content.Context;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.widget.TextView;
 
-import com.example.smarthomeupgrade.util.Dataset;
 import com.example.smarthomeupgrade.util.SHUFileUtilities;
-import com.example.smarthomeupgrade.util.SaveEntry;
+
 import com.example.smarthomeupgrade.util.SaveHandler;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -26,10 +24,6 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     
