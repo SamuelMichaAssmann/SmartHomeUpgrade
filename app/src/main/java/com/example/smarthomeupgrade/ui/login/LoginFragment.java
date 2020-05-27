@@ -59,7 +59,7 @@ public class LoginFragment extends Fragment {
         commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001 test link
+
                 EditText github = root.findViewById(R.id.text_link);
                 EditText filepath = root.findViewById(R.id.text_name);
                 Log.d("test","got Link: " + github.getText().toString());
@@ -68,10 +68,10 @@ public class LoginFragment extends Fragment {
                     Log.d("test","debugging Dataset");
                     Dataset webLoadingTask = new Dataset( root, root.getContext(),filepath.getText().toString() + ".txt");
                     webLoadingTask.execute();
-                } else if(github.getText().toString().equals("v")) {
-                    Dataset webLoadingTask = new Dataset( root, "https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001", root.getContext(), filepath.getText().toString() + ".txt");
+                }else if(github.getText().toString().equals("v")) {
+                    Dataset webLoadingTask = new Dataset( root, "https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W002", root.getContext(), filepath.getText().toString() + ".txt");
                     webLoadingTask.execute();
-                    MainActivity.saveHandler.createSave(filepath.getText().toString() + ".txt","https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001");
+                    MainActivity.saveHandler.createSave(filepath.getText().toString() + ".txt","https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W002");
                 } else {
                     Dataset webLoadingTask = new Dataset( root, github.getText().toString(), root.getContext(), filepath.getText().toString() + ".txt");
                     webLoadingTask.execute();

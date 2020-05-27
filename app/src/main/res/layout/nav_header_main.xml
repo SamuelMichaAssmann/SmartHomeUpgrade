@@ -14,18 +14,20 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@mipmap/waschmaschine" />
 
     <TextView
         android:layout_width="320dp"
-        android:layout_height="38dp"
+        android:layout_height="40dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/nav_header_title"
-        android:textColor="@color/colorgrey"
+        android:text="@string/die_digitale_waschmaschine"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:textColor="@color/cardview_dark_background"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColorHighlight="#F44336"
         android:textColorLink="#E64A19" />
