@@ -105,11 +105,16 @@ public class SaveHandler extends ArrayList<SaveEntry> {
         for (int[] i : arr) {
             Log.d("Data", "All: " + i[0] + " True: " + i[1]);
         }
-        String t = "[" + (100 / arr[0][0]) * arr[0][1];
-        for (int j = 1; j < arr.length; j++){
-            if (arr[j][0] != 0){
-                t += ", " + 100 / arr[j][0] * arr[j][1];
-            }else   t += ", 0";
+        int[] data = new int[7];
+        for (int i = 0; i < data.length; i++) {
+            try {
+                data[i] = 100 - (100 / arr[i][0] * arr[i][1]);
+            }catch (Exception ignored){}
+        }
+
+        String t = "[" + data[0];
+        for (int j = 1; j < data.length; j++){
+            t += ", " + data[j];
         }
 
         return t + "]";

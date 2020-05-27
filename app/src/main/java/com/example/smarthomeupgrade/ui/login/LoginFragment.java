@@ -77,7 +77,10 @@ public class LoginFragment extends Fragment {
                     webLoadingTask.execute();
                     MainActivity.saveHandler.createSave(filepath.getText().toString() + ".txt",github.getText().toString());
                 }
-                //final NavController navController = Navigation.findNavController(View.inflate())
+                github.setText("");
+                filepath.setText("");
+                //final NavController navController = Navigation.findNavController();
+                //navController.navigate(R.id.nav_home);
 
             }
         });
