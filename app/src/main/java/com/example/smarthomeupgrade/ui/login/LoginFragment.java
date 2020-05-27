@@ -3,6 +3,7 @@ package com.example.smarthomeupgrade.ui.login;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smarthomeupgrade.MainActivity;
@@ -52,15 +55,8 @@ public class LoginFragment extends Fragment {
         webView.setBackgroundColor(Color.TRANSPARENT);
         websettings.setJavaScriptEnabled(true);
 
-
-        //list = root.findViewById(R.id.listview);
-        //layoutManager = new LinearLayoutManager(root.getContext());
-        //list.setLayoutManager(layoutManager);
-
-
         Button commit = root.findViewById(R.id.button_add);
         commit.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 //https://raw.githubusercontent.com/SamuelMichaAssmann/DummyDBSmartHomeUpgrade/master/W001 test link
@@ -81,12 +77,10 @@ public class LoginFragment extends Fragment {
                     webLoadingTask.execute();
                     MainActivity.saveHandler.createSave(filepath.getText().toString() + ".txt",github.getText().toString());
                 }
-                //Clear Textfield Text
-                //goto home
+                //final NavController navController = Navigation.findNavController(View.inflate())
 
             }
         });
-
 
         return root;
     }

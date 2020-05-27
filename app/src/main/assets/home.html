@@ -27,17 +27,17 @@
             
 
             if (data[0]){
-                imag += imag1; 
-            }else {
                 imag += imag2;
+            }else {
+                imag += imag1;
             }
             imag +=imagend1;
             for (let index = 1 ; index < data.length; index++) {
                 imag += imagstart2;
                 if (data[index]){
-                    imag += imag1;
-                }else {
                     imag += imag2;
+                }else {
+                    imag += imag1;
                 }
                 imag +=imagend1;
             }
