@@ -26,7 +26,7 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/die_digitale_waschmaschine"
         android:textStyle="bold"
-        android:textSize="15dp"
+        android:textSize="15dp   "
         android:textColor="@color/cardview_dark_background"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColorHighlight="#F44336"
